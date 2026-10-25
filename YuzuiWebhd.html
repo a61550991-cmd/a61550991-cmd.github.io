@@ -33,164 +33,180 @@
       --radius-xl: 32px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
-    html, body { width: 100%; min-height: 100%; background: var(--bg-void); color: var(--text-main); overflow-x: hidden; position: relative; scroll-behavior: smooth; }
-    body { display: flex; justify-content: center; background: radial-gradient(circle at top, rgba(255, 0, 60, 0.14), transparent 26%), linear-gradient(180deg, #090206 0%, #040104 100%); }
-    button, input, select { font: inherit; -webkit-appearance: none; appearance: none; }
-    .hidden { display: none !important; }
-    #app { width: 100%; max-width: 480px; min-height: 100vh; background: linear-gradient(180deg, #0c0207 0%, #040103 100%); position: relative; box-shadow: 0 0 90px rgba(0, 0, 0, 0.9); overflow: hidden; isolation: isolate; }
+    * { box-sizing: border-box; margin:0; padding:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; -webkit-tap-highlight-color:transparent; }
+    html, body { width:100%; min-height:100%; background:var(--bg-void); color:var(--text-main); overflow-x:hidden; position:relative; scroll-behavior:smooth; }
+    body { display:flex; justify-content:center; background:radial-gradient(circle at top, rgba(255,0,60,0.14), transparent 26%), linear-gradient(180deg,#090206 0%,#040104 100%); }
+    button, input, select { font:inherit; -webkit-appearance:none; appearance:none; }
+    a { color:inherit; text-decoration:none; }
+    .hidden { display:none !important; }
+    #app { width:100%; max-width:480px; min-height:100vh; background:linear-gradient(180deg,#0c0207 0%,#040103 100%); position:relative; box-shadow:0 0 90px rgba(0,0,0,0.9); overflow:hidden; isolation:isolate; }
 
-    .status-bar { height: 28px; display: flex; align-items: center; justify-content: space-between; padding: 4px 18px 0; font-size: 11px; color: var(--text-muted); font-weight: 800; letter-spacing: 0.04em; position: relative; z-index: 4; }
-    .status-icons { display: flex; align-items: center; gap: 7px; opacity: 0.9; }
-    .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.8); display: inline-block; }
-    .dot.red { background: var(--red-primary); box-shadow: 0 0 10px rgba(255,0,60,0.7); }
+    .status-bar { height:28px; display:flex; align-items:center; justify-content:space-between; padding:4px 18px 0; font-size:11px; color:var(--text-muted); font-weight:800; letter-spacing:0.04em; position:relative; z-index:4; }
+    .status-icons { display:flex; align-items:center; gap:7px; opacity:0.9; }
+    .dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.8); display:inline-block; }
+    .dot.red { background:var(--red-primary); box-shadow:0 0 10px rgba(255,0,60,0.7); }
 
-    .top-bar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px 12px; background: rgba(8, 2, 5, 0.9); border-bottom: 1px solid rgba(255, 0, 60, 0.2); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
-    .brand { display: flex; align-items: center; gap: 8px; font-size: 21px; font-weight: 900; letter-spacing: -0.05em; background: linear-gradient(135deg, #ffffff 0%, var(--red-primary) 80%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .brand-mark { width: 28px; height: 28px; border-radius: 10px; display: grid; place-items: center; font-size: 14px; font-weight: 900; color: #fff; background: linear-gradient(135deg, var(--red-primary), #73001b); box-shadow: 0 10px 18px rgba(255, 0, 60, 0.35); }
-    .vip-badge { display: none; align-items: center; gap: 4px; padding: 5px 10px; border-radius: 999px; background: linear-gradient(135deg, var(--gold), #ff8c00); color: #0d0909; font-size: 10px; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; box-shadow: var(--shadow-gold); }
-    .vip-badge.visible { display: inline-flex; }
-    .top-actions { display: flex; align-items: center; gap: 10px; }
-    .auth-actions { display: flex; align-items: center; gap: 8px; margin-right: 6px; }
-    .auth-btn { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); color: var(--text-main); border-radius: 999px; padding: 7px 10px; font-size: 10px; font-weight: 800; cursor: pointer; }
-    .auth-btn.primary { background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(255, 0, 60, 0.12)); border-color: rgba(255,183,3,0.45); color: var(--gold); }
-    .icon-btn { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: rgba(255,255,255,0.02); color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; touch-action: manipulation; position: relative; }
-    .icon-btn:active { transform: scale(0.95); border-color: var(--red-primary); }
-    .icon-btn.vip-trigger { background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(255, 0, 60, 0.12)); border-color: rgba(255, 183, 3, 0.48); color: var(--gold); box-shadow: 0 0 14px rgba(255, 183, 3, 0.14); }
+    .top-bar { position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 18px 12px; background:rgba(8,2,5,0.9); border-bottom:1px solid rgba(255,0,60,0.2); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
+    .brand { display:flex; align-items:center; gap:8px; font-size:21px; font-weight:900; letter-spacing:-0.05em; background:linear-gradient(135deg,#fff 0%,var(--red-primary) 80%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .brand-mark { width:28px; height:28px; border-radius:10px; display:grid; place-items:center; font-size:14px; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--red-primary),#73001b); box-shadow:0 10px 18px rgba(255,0,60,0.35); }
+    .top-actions { display:flex; align-items:center; gap:10px; }
+    .auth-actions { display:flex; align-items:center; gap:8px; }
+    .auth-btn { border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.02); color:var(--text-main); border-radius:999px; padding:7px 10px; font-size:10px; font-weight:800; cursor:pointer; }
+    .auth-btn.primary { background:linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(255, 0, 60, 0.12)); border-color:rgba(255,183,3,0.45); color:var(--gold); }
+    .icon-btn { width:38px; height:38px; border:1px solid var(--line); border-radius:50%; background:rgba(255,255,255,0.02); color:var(--text-main); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; touch-action:manipulation; position:relative; }
+    .icon-btn:active { transform:scale(0.95); border-color:var(--red-primary); }
+    .icon-btn.vip-trigger { background:linear-gradient(135deg, rgba(255,183,3,0.18), rgba(255,0,60,0.12)); border-color:rgba(255,183,3,0.48); color:var(--gold); box-shadow:0 0 14px rgba(255,183,3,0.14); }
 
-    .screen { display: none; flex-direction: column; padding: 14px 16px 88px; animation: fadeIn 0.25s ease; min-height: calc(100vh - 140px); }
-    .screen.active { display: flex; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .screen { display:none; flex-direction:column; padding:14px 16px 88px; animation:fadeIn 0.25s ease; min-height:calc(100vh - 140px); }
+    .screen.active { display:flex; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-    .banner { background: linear-gradient(135deg, #2d0611 0%, #15060d 40%, #0b0206 100%); border: 1px solid var(--line-red); border-radius: var(--radius-md); padding: 16px 18px; margin-bottom: 18px; position: relative; overflow: hidden; box-shadow: var(--shadow-red); cursor: pointer; }
-    .banner::after { content: ""; position: absolute; right: -24px; top: -24px; width: 120px; height: 120px; background: radial-gradient(circle, rgba(255,0,60,0.42), transparent 65%); pointer-events: none; }
-    .banner-tag { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); font-size: 10px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 7px; }
-    .banner-title { font-size: 17px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 5px; }
-    .banner-desc { color: var(--text-muted); font-size: 12px; line-height: 1.45; margin-bottom: 12px; max-width: 300px; }
-    .banner-btn { border: none; border-radius: 14px; padding: 8px 16px; background: linear-gradient(135deg, var(--red-primary), #8d0026); color: #fff; font-size: 12px; font-weight: 900; box-shadow: 0 9px 18px rgba(255, 0, 60, 0.42); cursor: pointer; }
+    .banner { background:linear-gradient(135deg,#2d0611 0%,#15060d 40%,#0b0206 100%); border:1px solid var(--line-red); border-radius:var(--radius-md); padding:16px 18px; margin-bottom:18px; position:relative; overflow:hidden; box-shadow:var(--shadow-red); cursor:pointer; }
+    .banner::after { content:""; position:absolute; right:-24px; top:-24px; width:120px; height:120px; background:radial-gradient(circle, rgba(255,0,60,0.42), transparent 65%); pointer-events:none; }
+    .banner-tag { display:inline-flex; align-items:center; gap:6px; color:var(--gold); font-size:10px; font-weight:900; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:7px; }
+    .banner-title { font-size:17px; font-weight:900; letter-spacing:-0.03em; margin-bottom:5px; }
+    .banner-desc { color:var(--text-muted); font-size:12px; line-height:1.45; margin-bottom:12px; max-width:300px; }
+    .banner-btn { border:none; border-radius:14px; padding:8px 16px; background:linear-gradient(135deg,var(--red-primary),#8d0026); color:#fff; font-size:12px; font-weight:900; box-shadow:0 9px 18px rgba(255,0,60,0.42); cursor:pointer; }
 
-    .upload-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0 0 18px; }
-    .upload-btn { border: 1px solid rgba(255, 0, 60, 0.18); background: linear-gradient(155deg, rgba(31, 5, 14, 1) 0%, rgba(15, 3, 6, 1) 100%); border-radius: var(--radius-md); padding: 12px 10px; color: #fff; font-weight: 800; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .upload-btn.primary { background: linear-gradient(135deg, var(--red-primary), #8d0026); box-shadow: var(--shadow-red); }
-    .upload-btn.gold { background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 0, 60, 0.14)); border-color: rgba(255,183,3,0.35); color: var(--gold); }
+    .upload-strip { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; margin:0 0 18px; }
+    .upload-btn { border:1px solid rgba(255,0,60,0.18); background:linear-gradient(155deg, rgba(31,5,14,1) 0%, rgba(15,3,6,1) 100%); border-radius:var(--radius-md); padding:12px 10px; color:#fff; font-weight:800; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .upload-btn.primary { background:linear-gradient(135deg,var(--red-primary),#8d0026); box-shadow:var(--shadow-red); }
+    .upload-btn.gold { background:linear-gradient(135deg, rgba(255,183,3,0.2), rgba(255,0,60,0.14)); border-color:rgba(255,183,3,0.35); color:var(--gold); }
 
-    .quota-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: rgba(19, 8, 13, 0.96); border: 1px solid rgba(255, 0, 60, 0.18); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 18px; }
-    .quota-info { min-width: 0; }
-    .quota-info strong { display: block; font-size: 14px; font-weight: 900; }
-    .quota-info span { display: block; margin-top: 4px; font-size: 11px; color: var(--text-muted); }
-    .quota-pill { flex-shrink: 0; border-radius: 999px; border: 1px solid rgba(255, 0, 60, 0.24); background: rgba(255, 0, 60, 0.12); color: var(--red-strong); padding: 6px 12px; font-size: 11px; font-weight: 900; }
-    .quota-pill.unlimited { border-color: rgba(255, 183, 3, 0.34); background: rgba(255, 183, 3, 0.14); color: var(--gold); }
+    .quota-card { display:flex; align-items:center; justify-content:space-between; gap:12px; background:rgba(19,8,13,0.96); border:1px solid rgba(255,0,60,0.18); border-radius:var(--radius-md); padding:12px 14px; margin-bottom:18px; }
+    .quota-info { min-width:0; }
+    .quota-info strong { display:block; font-size:14px; font-weight:900; }
+    .quota-info span { display:block; margin-top:4px; font-size:11px; color:var(--text-muted); }
+    .quota-pill { flex-shrink:0; border-radius:999px; border:1px solid rgba(255,0,60,0.24); background:rgba(255,0,60,0.12); color:var(--red-strong); padding:6px 12px; font-size:11px; font-weight:900; }
+    .quota-pill.unlimited { border-color:rgba(255,183,3,0.34); background:rgba(255,183,3,0.14); color:var(--gold); }
 
-    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .section-title { font-size: 15px; font-weight: 900; letter-spacing: -0.02em; }
-    .section-subtitle { font-size: 11px; color: var(--text-muted); font-weight: 700; }
+    .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .section-title { font-size:15px; font-weight:900; letter-spacing:-0.02em; }
+    .section-subtitle { font-size:11px; color:var(--text-muted); font-weight:700; }
 
-    .quick-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 20px; }
-    .btn-media { border: 1px solid var(--line-red); border-radius: var(--radius-md); background: linear-gradient(155deg, rgba(31, 5, 14, 1) 0%, rgba(15, 3, 6, 1) 100%); min-height: 134px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.2s ease; touch-action: manipulation; padding: 12px; }
-    .btn-media:active { transform: scale(0.98); border-color: var(--red-primary); box-shadow: 0 0 16px rgba(255, 0, 60, 0.18); }
-    .icon-wrap { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, rgba(255, 0, 60, 0.9), rgba(104, 0, 24, 0.96)); box-shadow: 0 10px 22px rgba(255, 0, 60, 0.26); color: #fff; }
-    .btn-media span { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; }
-    .btn-media small { color: var(--text-muted); font-size: 11px; text-align: center; }
+    .quick-actions { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; margin-bottom:20px; }
+    .btn-media { border:1px solid var(--line-red); border-radius:var(--radius-md); background:linear-gradient(155deg, rgba(31,5,14,1) 0%, rgba(15,3,6,1) 100%); min-height:134px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; cursor:pointer; transition:transform 0.18s ease, border-color 0.18s ease, box-shadow 0.2s ease; touch-action:manipulation; padding:12px; }
+    .btn-media:active { transform:scale(0.98); border-color:var(--red-primary); box-shadow:0 0 16px rgba(255,0,60,0.18); }
+    .icon-wrap { width:48px; height:48px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg, rgba(255,0,60,0.9), rgba(104,0,24,0.96)); box-shadow:0 10px 22px rgba(255,0,60,0.26); color:#fff; }
+    .btn-media span { font-size:14px; font-weight:900; letter-spacing:-0.02em; }
+    .btn-media small { color:var(--text-muted); font-size:11px; text-align:center; }
 
-    .tool-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px; }
-    .tool-card { position: relative; display: flex; align-items: center; gap: 10px; background: rgba(17, 7, 11, 0.96); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px; cursor: pointer; transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease; touch-action: manipulation; overflow: hidden; }
-    .tool-card:active { transform: scale(0.98); border-color: var(--red-primary); background: rgba(24, 10, 15, 1); }
-    .tool-card.premium { background: linear-gradient(180deg, rgba(22, 8, 8, 0.95), rgba(17, 7, 11, 0.96)); }
-    .tool-card.locked::after { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255, 183, 3, 0.08), transparent 50%); pointer-events: none; }
-    .tool-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(255, 0, 60, 0.08); color: var(--red-strong); display: grid; place-items: center; flex-shrink: 0; font-size: 18px; }
-    .tool-card.premium .tool-icon { background: rgba(255, 183, 3, 0.1); color: var(--gold); }
-    .tool-meta { min-width: 0; flex: 1; }
-    .tool-name { font-size: 12px; font-weight: 900; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .tool-tag { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
-    .lock-badge { position: absolute; top: 8px; right: 8px; width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; background: rgba(0, 0, 0, 0.72); color: var(--gold); font-size: 9px; font-weight: 900; }
+    .tool-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; margin-bottom:20px; }
+    .tool-card { position:relative; display:flex; align-items:center; gap:10px; background:rgba(17,7,11,0.96); border:1px solid var(--line); border-radius:var(--radius-sm); padding:12px; cursor:pointer; transition:border-color 0.18s ease, background 0.18s ease, transform 0.18s ease; touch-action:manipulation; overflow:hidden; }
+    .tool-card:active { transform:scale(0.98); border-color:var(--red-primary); background:rgba(24,10,15,1); }
+    .tool-card.premium { background:linear-gradient(180deg, rgba(22,8,8,0.95), rgba(17,7,11,0.96)); }
+    .tool-card.locked::after { content:""; position:absolute; inset:0; background:linear-gradient(135deg, rgba(255,183,3,0.08), transparent 50%); pointer-events:none; }
+    .tool-icon { width:36px; height:36px; border-radius:10px; background:rgba(255,0,60,0.08); color:var(--red-strong); display:grid; place-items:center; flex-shrink:0; font-size:18px; }
+    .tool-card.premium .tool-icon { background:rgba(255,183,3,0.1); color:var(--gold); }
+    .tool-meta { min-width:0; flex:1; }
+    .tool-name { font-size:12px; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .tool-tag { font-size:10px; color:var(--text-muted); margin-top:2px; }
+    .lock-badge { position:absolute; top:8px; right:8px; width:18px; height:18px; display:grid; place-items:center; border-radius:50%; background:rgba(0,0,0,0.72); color:var(--gold); font-size:9px; font-weight:900; }
 
-    .editor-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
-    .editor-title { font-size: 14px; font-weight: 900; letter-spacing: -0.02em; text-align: center; flex: 1; }
-    .editor-viewport { width: 100%; height: 380px; border-radius: var(--radius-md); border: 1px solid rgba(255, 0, 60, 0.28); background: #000; position: relative; overflow: hidden; box-shadow: 0 0 30px rgba(0, 0, 0, 0.66); margin-bottom: 14px; }
-    .compare-stage { position: relative; width: 100%; height: 100%; overflow: hidden; touch-action: none; background: linear-gradient(120deg, #060407 0%, #17070f 100%); }
-    .media-item { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; background: #000; filter: saturate(1.1) contrast(1.08); }
-    .enhanced-layer { position: absolute; inset: 0; overflow: hidden; clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); pointer-events: none; background: linear-gradient(135deg, rgba(255, 0, 60, 0.15), rgba(255, 183, 3, 0.12)); }
-    .label-badge { position: absolute; bottom: 12px; padding: 5px 8px; border-radius: 7px; background: rgba(0, 0, 0, 0.62); font-size: 10px; font-weight: 900; color: #fff; z-index: 12; user-select: none; }
-    .label-before { left: 12px; }
-    .label-after { right: 12px; border: 1px solid rgba(255, 0, 60, 0.2); color: var(--red-strong); }
-    .watermark { position: absolute; right: 12px; bottom: 12px; padding: 4px 7px; border-radius: 6px; background: rgba(0,0,0,0.44); font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.7); z-index: 13; user-select: none; }
-    .slider-handle { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff; box-shadow: 0 0 16px rgba(255, 0, 60, 0.72); z-index: 20; cursor: ew-resize; transform: translateX(-50%); }
-    .slider-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #000; display: grid; place-items: center; font-size: 11px; font-weight: 900; box-shadow: 0 0 18px rgba(255, 0, 60, 0.46); }
+    .editor-header { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; }
+    .editor-title { font-size:14px; font-weight:900; letter-spacing:-0.02em; text-align:center; flex:1; }
+    .editor-viewport { width:100%; height:380px; border-radius:var(--radius-md); border:1px solid rgba(255,0,60,0.28); background:#000; position:relative; overflow:hidden; box-shadow:0 0 30px rgba(0,0,0,0.66); margin-bottom:14px; }
+    .compare-stage { position:relative; width:100%; height:100%; overflow:hidden; touch-action:none; background:linear-gradient(120deg,#060407 0%,#17070f 100%); }
+    .media-item { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none; user-select:none; background:#000; filter:saturate(1.1) contrast(1.08); }
+    .enhanced-layer { position:absolute; inset:0; overflow:hidden; clip-path:polygon(50% 0, 100% 0, 100% 100%, 50% 100%); pointer-events:none; background:linear-gradient(135deg, rgba(255,0,60,0.15), rgba(255,183,3,0.12)); }
+    .label-badge { position:absolute; bottom:12px; padding:5px 8px; border-radius:7px; background:rgba(0,0,0,0.62); font-size:10px; font-weight:900; color:#fff; z-index:12; user-select:none; }
+    .label-before { left:12px; }
+    .label-after { right:12px; border:1px solid rgba(255,0,60,0.2); color:var(--red-strong); }
+    .watermark { position:absolute; right:12px; bottom:12px; padding:4px 7px; border-radius:6px; background:rgba(0,0,0,0.44); font-size:10px; font-weight:800; color:rgba(255,255,255,0.7); z-index:13; user-select:none; }
+    .slider-handle { position:absolute; top:0; bottom:0; left:50%; width:2px; background:#fff; box-shadow:0 0 16px rgba(255,0,60,0.72); z-index:20; cursor:ew-resize; transform:translateX(-50%); }
+    .slider-knob { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:36px; height:36px; border-radius:50%; background:#fff; color:#000; display:grid; place-items:center; font-size:11px; font-weight:900; box-shadow:0 0 18px rgba(255,0,60,0.46); }
 
-    .editor-tabs { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; scrollbar-width: none; }
-    .editor-tabs::-webkit-scrollbar { display: none; }
-    .tab-btn { border: 1px solid var(--line); background: rgba(17, 7, 11, 0.96); color: var(--text-muted); border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 800; white-space: nowrap; cursor: pointer; }
-    .tab-btn.active { background: linear-gradient(135deg, var(--red-primary), #8f001f); border-color: transparent; color: #fff; box-shadow: 0 8px 18px rgba(255, 0, 60, 0.28); }
+    .editor-tabs { display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:12px; scrollbar-width:none; }
+    .editor-tabs::-webkit-scrollbar { display:none; }
+    .tab-btn { border:1px solid var(--line); background:rgba(17,7,11,0.96); color:var(--text-muted); border-radius:999px; padding:8px 14px; font-size:12px; font-weight:800; white-space:nowrap; cursor:pointer; }
+    .tab-btn.active { background:linear-gradient(135deg,var(--red-primary),#8f001f); border-color:transparent; color:#fff; box-shadow:0 8px 18px rgba(255,0,60,0.28); }
 
-    .panel { background: rgba(17, 7, 11, 0.96); border: 1px solid rgba(255, 0, 60, 0.18); border-radius: var(--radius-md); padding: 14px; margin-bottom: 14px; }
-    .preset-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-    .preset { border: 1px solid var(--line); background: rgba(37, 12, 18, 0.7); color: #fff; border-radius: var(--radius-sm); padding: 10px 6px; text-align: center; font-size: 11px; font-weight: 800; cursor: pointer; transition: all 0.18s ease; }
-    .preset.active { background: rgba(255, 0, 60, 0.14); border-color: var(--red-primary); color: var(--red-strong); box-shadow: 0 0 10px rgba(255, 0, 60, 0.18); }
-    .slider-group { margin-bottom: 12px; }
-    .slider-group:last-child { margin-bottom: 0; }
-    .slider-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; font-size: 12px; color: var(--text-muted); font-weight: 700; }
-    .range { width: 100%; height: 6px; background: #240711; border-radius: 999px; outline: none; -webkit-appearance: none; appearance: none; }
-    .range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--red-primary); box-shadow: 0 0 12px rgba(255, 0, 60, 0.75); cursor: pointer; border: 2px solid rgba(255,255,255,0.7); }
+    .panel { background:rgba(17,7,11,0.96); border:1px solid rgba(255,0,60,0.18); border-radius:var(--radius-md); padding:14px; margin-bottom:14px; }
+    .preset-grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; }
+    .preset { border:1px solid var(--line); background:rgba(37,12,18,0.7); color:#fff; border-radius:var(--radius-sm); padding:10px 6px; text-align:center; font-size:11px; font-weight:800; cursor:pointer; transition:all 0.18s ease; }
+    .preset.active { background:rgba(255,0,60,0.14); border-color:var(--red-primary); color:var(--red-strong); box-shadow:0 0 10px rgba(255,0,60,0.18); }
+    .slider-group { margin-bottom:12px; }
+    .slider-group:last-child { margin-bottom:0; }
+    .slider-head { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px; font-size:12px; color:var(--text-muted); font-weight:700; }
+    .range { width:100%; height:6px; background:#240711; border-radius:999px; outline:none; -webkit-appearance:none; appearance:none; }
+    .range::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:18px; height:18px; border-radius:50%; background:var(--red-primary); box-shadow:0 0 12px rgba(255,0,60,0.75); cursor:pointer; border:2px solid rgba(255,255,255,0.7); }
 
-    .btn-primary { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; border: none; border-radius: var(--radius-md); padding: 15px 16px; font-size: 15px; font-weight: 900; color: #fff; background: linear-gradient(135deg, var(--red-primary), #8d0026); box-shadow: var(--shadow-red); cursor: pointer; transition: transform 0.18s ease, filter 0.18s ease; }
-    .btn-primary:active { transform: scale(0.98); }
-    .btn-primary.secondary { background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 0, 60, 0.14)); border: 1px solid rgba(255, 183, 3, 0.32); color: var(--gold); box-shadow: var(--shadow-gold); }
+    .btn-primary { width:100%; display:flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:var(--radius-md); padding:15px 16px; font-size:15px; font-weight:900; color:#fff; background:linear-gradient(135deg,var(--red-primary),#8d0026); box-shadow:var(--shadow-red); cursor:pointer; transition:transform 0.18s ease, filter 0.18s ease; }
+    .btn-primary:active { transform:scale(0.98); }
+    .btn-primary.secondary { background:linear-gradient(135deg, rgba(255,183,3,0.2), rgba(255,0,60,0.14)); border:1px solid rgba(255,183,3,0.32); color:var(--gold); box-shadow:var(--shadow-gold); }
 
-    .export-box { background: rgba(17, 7, 11, 0.96); border: 1px solid rgba(255, 0, 60, 0.18); border-radius: var(--radius-md); padding: 14px; margin-bottom: 14px; }
-    .option-title { margin-bottom: 10px; color: var(--text-muted); font-size: 11px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
-    .chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-    .chips.fps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .chip { position: relative; border: 1px solid var(--line); background: rgba(32, 11, 17, 0.9); border-radius: var(--radius-sm); padding: 10px 5px; text-align: center; font-size: 12px; font-weight: 800; color: #fff; cursor: pointer; transition: all 0.18s ease; }
-    .chip.selected { background: rgba(255, 0, 60, 0.12); border-color: var(--red-primary); color: var(--red-strong); box-shadow: 0 0 12px rgba(255, 0, 60, 0.2); }
-    .chip .chip-sub { display: block; margin-top: 2px; font-size: 8px; color: var(--text-muted); font-weight: 700; }
-    .chip .mini-lock { position: absolute; top: 4px; right: 4px; color: var(--gold); font-size: 9px; font-weight: 900; }
+    .export-box { background:rgba(17,7,11,0.96); border:1px solid rgba(255,0,60,0.18); border-radius:var(--radius-md); padding:14px; margin-bottom:14px; }
+    .option-title { margin-bottom:10px; color:var(--text-muted); font-size:11px; font-weight:900; letter-spacing:0.08em; text-transform:uppercase; }
+    .chips { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px; }
+    .chips.fps { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    .chip { position:relative; border:1px solid var(--line); background:rgba(32,11,17,0.9); border-radius:var(--radius-sm); padding:10px 5px; text-align:center; font-size:12px; font-weight:800; color:#fff; cursor:pointer; transition:all 0.18s ease; }
+    .chip.selected { background:rgba(255,0,60,0.12); border-color:var(--red-primary); color:var(--red-strong); box-shadow:0 0 12px rgba(255,0,60,0.2); }
+    .chip .chip-sub { display:block; margin-top:2px; font-size:8px; color:var(--text-muted); font-weight:700; }
+    .chip .mini-lock { position:absolute; top:4px; right:4px; color:var(--gold); font-size:9px; font-weight:900; }
 
-    .progress-wrap { display: none; margin-bottom: 14px; }
-    .progress-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; color: var(--text-muted); font-size: 12px; font-weight: 700; }
-    .progress-bar { width: 100%; height: 8px; background: #1f0910; border-radius: 999px; overflow: hidden; }
-    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--red-primary), #ff4d67); transition: width 0.18s ease; }
-    .export-done { display: none; margin-top: 14px; }
-    .done-note { text-align: center; color: var(--success); font-weight: 900; font-size: 14px; margin-bottom: 12px; }
+    .progress-wrap { display:none; margin-bottom:14px; }
+    .progress-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; color:var(--text-muted); font-size:12px; font-weight:700; }
+    .progress-bar { width:100%; height:8px; background:#1f0910; border-radius:999px; overflow:hidden; }
+    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--red-primary),#ff4d67); transition:width 0.18s ease; }
+    .export-done { display:none; margin-top:14px; }
+    .done-note { text-align:center; color:var(--success); font-weight:900; font-size:14px; margin-bottom:12px; }
 
-    .bottom-nav { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 480px; height: 64px; background: rgba(8, 2, 4, 0.96); border-top: 1px solid rgba(255, 0, 60, 0.18); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; justify-content: space-around; align-items: center; z-index: 40; }
-    .nav-item { flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--text-muted); font-size: 11px; font-weight: 700; cursor: pointer; touch-action: manipulation; }
-    .nav-item.active { color: var(--red-primary); }
-    .nav-item.active svg { stroke: var(--red-primary); filter: drop-shadow(0 0 8px rgba(255, 0, 60, 0.4)); }
-    .nav-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .bottom-nav { position:fixed; left:50%; bottom:0; transform:translateX(-50%); width:100%; max-width:480px; height:64px; background:rgba(8,2,4,0.96); border-top:1px solid rgba(255,0,60,0.18); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); display:flex; justify-content:space-around; align-items:center; z-index:40; }
+    .nav-item { flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; color:var(--text-muted); font-size:11px; font-weight:700; cursor:pointer; touch-action:manipulation; }
+    .nav-item.active { color:var(--red-primary); }
+    .nav-item.active svg { stroke:var(--red-primary); filter:drop-shadow(0 0 8px rgba(255,0,60,0.4)); }
+    .nav-item svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
 
-    .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(0,0,0,0.82); backdrop-filter: blur(12px); z-index: 100; }
-    .modal.open { display: flex; animation: fadeIn 0.2s ease; }
-    .modal-card { width: min(390px, 100%); background: linear-gradient(180deg, #220910 0%, #0d0106 100%); border: 1px solid var(--line-red); border-radius: var(--radius-lg); padding: 22px 18px 18px; box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 28px rgba(255,0,60,0.18); position: relative; }
-    .close-btn { position: absolute; top: 12px; right: 12px; border: none; background: transparent; color: var(--text-muted); font-size: 22px; cursor: pointer; line-height: 1; }
-    .vip-mark { width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 10px; display: grid; place-items: center; background: radial-gradient(circle, rgba(255, 183, 3, 0.24), rgba(255, 0, 60, 0.12)); border: 2px solid rgba(255, 183, 3, 0.7); color: var(--gold); font-size: 26px; font-weight: 900; }
-    .modal h3 { text-align: center; margin-bottom: 6px; font-size: 20px; font-weight: 900; letter-spacing: -0.03em; }
-    .modal p { text-align: center; color: var(--text-muted); font-size: 12px; line-height: 1.45; margin-bottom: 16px; }
-    .price-list { display: grid; gap: 10px; margin-bottom: 16px; }
-    .price-card { border: 1px solid var(--line); background: rgba(11, 4, 7, 0.85); border-radius: var(--radius-md); padding: 14px; position: relative; overflow: hidden; }
-    .price-card.popular { border-color: rgba(255, 183, 3, 0.35); background: linear-gradient(180deg, rgba(36, 17, 7, 0.9), rgba(13, 5, 7, 0.92)); }
-    .price-card .tag { position: absolute; top: 10px; right: 10px; background: rgba(255, 183, 3, 0.18); color: var(--gold); border: 1px solid rgba(255,183,3,0.36); border-radius: 999px; padding: 4px 8px; font-size: 8px; font-weight: 900; text-transform: uppercase; }
-    .price-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
-    .price-top strong { font-size: 18px; font-weight: 900; }
-    .price-top span { color: var(--text-muted); font-size: 11px; }
-    .price-card ul { list-style: none; display: grid; gap: 6px; color: var(--text-muted); font-size: 11px; }
-    .price-card li::before { content: "•"; color: var(--gold); margin-right: 6px; }
+    .modal { position:fixed; inset:0; display:none; align-items:center; justify-content:center; padding:16px; background:rgba(0,0,0,0.82); backdrop-filter:blur(12px); z-index:100; }
+    .modal.open { display:flex; animation:fadeIn 0.2s ease; }
+    .modal-card { width:min(390px,100%); background:linear-gradient(180deg,#220910 0%,#0d0106 100%); border:1px solid var(--line-red); border-radius:var(--radius-lg); padding:22px 18px 18px; box-shadow:0 10px 40px rgba(0,0,0,0.8), 0 0 28px rgba(255,0,60,0.18); position:relative; }
+    .close-btn { position:absolute; top:12px; right:12px; border:none; background:transparent; color:var(--text-muted); font-size:22px; cursor:pointer; line-height:1; }
+    .modal h3 { text-align:center; margin-bottom:6px; font-size:20px; font-weight:900; letter-spacing:-0.03em; }
+    .modal p { text-align:center; color:var(--text-muted); font-size:12px; line-height:1.45; margin-bottom:16px; }
+    .auth-form { display:grid; gap:10px; }
+    .input-field { width:100%; border:1px solid rgba(255,255,255,0.08); background:rgba(17,7,11,0.9); color:#fff; border-radius:12px; padding:12px 14px; outline:none; }
+    .input-field:focus { border-color:rgba(255,0,60,0.6); box-shadow:0 0 0 2px rgba(255,0,60,0.12); }
+    .subtle-link { color:var(--gold); font-size:11px; font-weight:800; text-align:center; margin-top:6px; cursor:pointer; }
+    .vip-mark { width:62px; height:62px; border-radius:50%; margin:0 auto 10px; display:grid; place-items:center; background:radial-gradient(circle, rgba(255,183,3,0.24), rgba(255,0,60,0.12)); border:2px solid rgba(255,183,3,0.7); color:var(--gold); font-size:26px; font-weight:900; }
 
-    .pass-wrap { display: grid; gap: 10px; margin-top: 10px; }
-    .input-pass { border: 1px solid rgba(255, 183, 3, 0.34); background: rgba(17, 7, 11, 0.9); border-radius: 12px; padding: 12px 14px; color: #fff; outline: none; }
-    .muted-note { font-size: 10px; color: var(--text-muted); text-align: center; }
-    .toast { position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%) translateY(12px); background: rgba(17, 7, 11, 0.95); border: 1px solid rgba(255, 0, 60, 0.25); color: #fff; font-size: 11px; font-weight: 800; padding: 10px 14px; border-radius: 999px; box-shadow: 0 10px 18px rgba(0,0,0,0.28); opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 120; pointer-events: none; }
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .profile-card { background:linear-gradient(180deg, rgba(31,5,14,1), rgba(12,3,7,1)); border:1px solid rgba(255,0,60,0.18); border-radius:var(--radius-lg); padding:16px; margin-bottom:18px; }
+    .profile-top { display:flex; align-items:center; gap:12px; }
+    .avatar { width:52px; height:52px; border-radius:50%; display:grid; place-items:center; font-size:22px; font-weight:900; background:linear-gradient(135deg, rgba(255,183,3,0.35), rgba(255,0,60,0.28)); border:1px solid rgba(255,183,3,0.38); }
+    .profile-name { font-weight:900; font-size:18px; margin-bottom:2px; }
+    .profile-email { font-size:11px; color:var(--text-muted); }
+    .stat-row { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px; margin-top:16px; }
+    .stat-box { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:10px 8px; text-align:center; }
+    .stat-box strong { display:block; font-size:16px; font-weight:900; }
+    .stat-box span { display:block; margin-top:4px; font-size:9px; color:var(--text-muted); }
 
-    .demo-placeholder { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,0,60,0.04)); color: var(--text-muted); font-size: 12px; text-align: center; padding: 18px; }
-    .video-meta { position: absolute; right: 12px; top: 12px; background: rgba(0,0,0,0.5); border-radius: 999px; padding: 5px 8px; font-size: 9px; font-weight: 800; color: rgba(255,255,255,0.82); z-index: 30; }
-    .compare-stage video { width: 100%; height: 100%; object-fit: cover; background: #000; }
-    .compare-stage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .project-list { display:grid; gap:10px; }
+    .project-item { background:rgba(17,7,11,0.96); border:1px solid rgba(255,0,60,0.18); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .project-item .meta strong { display:block; font-size:13px; margin-bottom:4px; }
+    .project-item .meta span { display:block; font-size:10px; color:var(--text-muted); }
+    .project-item .mini-btn { border:1px solid rgba(255,183,3,0.36); background:rgba(255,183,3,0.08); color:var(--gold); border-radius:8px; padding:7px 10px; font-size:10px; font-weight:800; }
 
-    @media (min-width: 480px) {
-      body { padding: 12px 0; }
-      #app { border-radius: 22px; overflow: hidden; }
-      .bottom-nav { max-width: 480px; }
-    }
+    .price-list { display:grid; gap:10px; margin-bottom:16px; }
+    .price-card { border:1px solid var(--line); background:rgba(11,4,7,0.85); border-radius:var(--radius-md); padding:14px; position:relative; overflow:hidden; }
+    .price-card.popular { border-color:rgba(255,183,3,0.35); background:linear-gradient(180deg, rgba(36,17,7,0.9), rgba(13,5,7,0.92)); }
+    .price-card .tag { position:absolute; top:10px; right:10px; background:rgba(255,183,3,0.18); color:var(--gold); border:1px solid rgba(255,183,3,0.36); border-radius:999px; padding:4px 8px; font-size:8px; font-weight:900; text-transform:uppercase; }
+    .price-top { display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:8px; }
+    .price-top strong { font-size:18px; font-weight:900; }
+    .price-top span { color:var(--text-muted); font-size:11px; }
+    .price-card ul { list-style:none; display:grid; gap:6px; color:var(--text-muted); font-size:11px; }
+    .price-card li::before { content:"•"; color:var(--gold); margin-right:6px; }
+
+    .pass-wrap { display:grid; gap:10px; margin-top:10px; }
+    .input-pass { border:1px solid rgba(255,183,3,0.34); background:rgba(17,7,11,0.9); border-radius:12px; padding:12px 14px; color:#fff; outline:none; }
+    .muted-note { font-size:10px; color:var(--text-muted); text-align:center; }
+    .toast { position:fixed; left:50%; bottom:90px; transform:translateX(-50%) translateY(12px); background:rgba(17,7,11,0.95); border:1px solid rgba(255,0,60,0.25); color:#fff; font-size:11px; font-weight:800; padding:10px 14px; border-radius:999px; box-shadow:0 10px 18px rgba(0,0,0,0.28); opacity:0; transition:opacity 0.2s ease, transform 0.2s ease; z-index:120; pointer-events:none; }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+    .demo-placeholder { display:flex; justify-content:center; align-items:center; width:100%; height:100%; background:linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,0,60,0.04)); color:var(--text-muted); font-size:12px; text-align:center; padding:18px; }
+    .video-meta { position:absolute; right:12px; top:12px; background:rgba(0,0,0,0.5); border-radius:999px; padding:5px 8px; font-size:9px; font-weight:800; color:rgba(255,255,255,0.82); z-index:30; }
+    .compare-stage video { width:100%; height:100%; object-fit:cover; background:#000; }
+    .compare-stage img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    @media (min-width:480px) { body { padding:12px 0; } #app { border-radius:22px; overflow:hidden; } .bottom-nav { max-width:480px; } }
   </style>
 </head>
 <body>
@@ -210,11 +226,12 @@
         <span>Yuzuki</span>
       </div>
       <div class="top-actions">
-        <div class="auth-actions">
+        <div class="auth-actions" id="authActions">
           <button class="auth-btn" id="loginBtn">Masuk</button>
           <button class="auth-btn primary" id="registerBtn">Daftar</button>
         </div>
         <button class="icon-btn vip-trigger" id="vipTrigger" aria-label="VIP">★</button>
+        <button class="icon-btn" id="notificationBtn" aria-label="Notifikasi">🔔</button>
         <button class="icon-btn" id="settingsBtn" aria-label="Pengaturan">⚙</button>
       </div>
     </header>
@@ -222,9 +239,9 @@
     <main>
       <section id="homeScreen" class="screen active">
         <div class="banner" id="bannerCard">
-          <div class="banner-tag">VIP • Halus</div>
+          <div class="banner-tag">VIP • AI</div>
           <div class="banner-title">Upscale foto & video HD/4K</div>
-          <div class="banner-desc">Hasil lebih halus, natural, dan siap dibagikan ke TikTok, Reels, WhatsApp, dan galeri.</div>
+          <div class="banner-desc">Enhance, stabilize, noise reducer, retouch, dan fitur AI premium siap dibuat lebih natural dan halus.</div>
           <button class="banner-btn">Coba sekarang</button>
         </div>
 
@@ -243,57 +260,91 @@
 
         <div class="section-header">
           <div class="section-title">Alat utama</div>
-          <div class="section-subtitle">Mobile-first</div>
+          <div class="section-subtitle">AI editor</div>
         </div>
 
         <div class="quick-actions">
           <button class="btn-media" data-open-editor data-media-type="photo">
             <div class="icon-wrap">📷</div>
-            <span>Foto HD</span>
-            <small>Upscale & haluskan</small>
+            <span>Enhance 4K</span>
+            <small>Jernihkan foto</small>
           </button>
           <button class="btn-media" data-open-editor data-media-type="video">
             <div class="icon-wrap">🎬</div>
-            <span>Video HD</span>
-            <small>Stabilizer & 60fps</small>
+            <span>Stabilizer</span>
+            <small>Video lebih stabil</small>
+          </button>
+          <button class="btn-media" data-tool="face">
+            <div class="icon-wrap">✦</div>
+            <span>Face Enhancer</span>
+            <small>Wajah lebih tajam</small>
+          </button>
+          <button class="btn-media" data-tool="noise">
+            <div class="icon-wrap">◌</div>
+            <span>Noise Reducer</span>
+            <small>Kurangi bintik</small>
+          </button>
+          <button class="btn-media" data-tool="interpolate">
+            <div class="icon-wrap">▣</div>
+            <span>Frame Interp</span>
+            <small>30 → 60 fps</small>
+          </button>
+          <button class="btn-media" data-tool="color">
+            <div class="icon-wrap">◐</div>
+            <span>Color HDR</span>
+            <small>Warna lebih hidup</small>
           </button>
         </div>
 
         <div class="section-header">
-          <div class="section-title">Editor cepat</div>
-          <div class="section-subtitle">Natural</div>
+          <div class="section-title">AI Tools</div>
+          <div class="section-subtitle">Segera hadir</div>
         </div>
 
         <div class="tool-grid">
           <div class="tool-card" data-tool="beauty">
             <div class="tool-icon">✦</div>
             <div class="tool-meta">
-              <div class="tool-name">Halus Kulit</div>
-              <div class="tool-tag">Skin smooth</div>
+              <div class="tool-name">Retouch & Beauty</div>
+              <div class="tool-tag">Kulit, mata, bibir</div>
             </div>
           </div>
-          <div class="tool-card premium" data-tool="enhance">
+          <div class="tool-card premium" data-tool="remover">
             <div class="tool-icon">✧</div>
             <div class="tool-meta">
-              <div class="tool-name">Enhance</div>
-              <div class="tool-tag">Color + HDR</div>
+              <div class="tool-name">Remover</div>
+              <div class="tool-tag">Hapus objek</div>
             </div>
             <div class="lock-badge">★</div>
           </div>
-          <div class="tool-card" data-tool="color">
-            <div class="tool-icon">◐</div>
+          <div class="tool-card" data-tool="cutout">
+            <div class="tool-icon">✂</div>
             <div class="tool-meta">
-              <div class="tool-name">Warna</div>
-              <div class="tool-tag">Saturasi</div>
+              <div class="tool-name">Cutout</div>
+              <div class="tool-tag">Potong subjek</div>
             </div>
           </div>
-          <div class="tool-card premium" data-tool="video">
-            <div class="tool-icon">▶</div>
+          <div class="tool-card premium" data-tool="expansion">
+            <div class="tool-icon">⇥</div>
             <div class="tool-meta">
-              <div class="tool-name">Video 4K</div>
-              <div class="tool-tag">60 fps</div>
+              <div class="tool-name">Expansion</div>
+              <div class="tool-tag">Perluas frame</div>
             </div>
             <div class="lock-badge">★</div>
+          </div>
+          <div class="tool-card" data-tool="anime">
+            <div class="tool-icon">A</div>
+            <div class="tool-meta">
+              <div class="tool-name">Style Anime</div>
+              <div class="tool-tag">Segera hadir</div>
+            </div>
+          </div>
+          <div class="tool-card" data-tool="textbehind">
+            <div class="tool-icon">T</div>
+            <div class="tool-meta">
+              <div class="tool-name">Text Behind</div>
+              <div class="tool-tag">Teks di belakang objek</div>
+            </div>
           </div>
         </div>
       </section>
@@ -323,9 +374,10 @@
 
         <div class="editor-tabs">
           <button class="tab-btn active" data-tab="enhance">Enhance</button>
-          <button class="tab-btn" data-tab="smooth">Halus</button>
-          <button class="tab-btn" data-tab="color">Warna</button>
-          <button class="tab-btn" data-tab="crop">Potong</button>
+          <button class="tab-btn" data-tab="wajah">Wajah</button>
+          <button class="tab-btn" data-tab="retouch">Retouch</button>
+          <button class="tab-btn" data-tab="warna">Warna</button>
+          <button class="tab-btn" data-tab="potong">Potong</button>
           <button class="tab-btn" data-tab="filter">Filter</button>
         </div>
 
@@ -408,6 +460,58 @@
           <button id="downloadBtn" class="btn-primary secondary">Unduh hasil</button>
         </div>
       </section>
+
+      <section id="profileScreen" class="screen">
+        <div class="editor-header">
+          <button class="icon-btn" id="backFromProfileBtn" aria-label="Kembali">←</button>
+          <div class="editor-title">Profil</div>
+          <button class="icon-btn" id="profileSettingsBtn" aria-label="Setelan">⚙</button>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-top">
+            <div class="avatar" id="profileAvatar">U</div>
+            <div>
+              <div class="profile-name" id="profileName">Pengguna</div>
+              <div class="profile-email" id="profileEmail">user@example.com</div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-box"><strong id="statProjects">12</strong><span>Project</span></div>
+            <div class="stat-box"><strong id="statExports">24</strong><span>Ekspor</span></div>
+            <div class="stat-box"><strong id="statQuota">HD</strong><span>Quota</span></div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <div class="section-title">Project terbaru</div>
+          <div class="section-subtitle">Riwayat</div>
+        </div>
+
+        <div class="project-list">
+          <div class="project-item">
+            <div class="meta">
+              <strong>Portrait Glow</strong>
+              <span>2 jam lalu • 1080p</span>
+            </div>
+            <button class="mini-btn">Buka</button>
+          </div>
+          <div class="project-item">
+            <div class="meta">
+              <strong>Video Stabil</strong>
+              <span>Hari ini • 4K</span>
+            </div>
+            <button class="mini-btn">Buka</button>
+          </div>
+          <div class="project-item">
+            <div class="meta">
+              <strong>Anime Retouch</strong>
+              <span>1 hari lalu • 720p</span>
+            </div>
+            <button class="mini-btn">Buka</button>
+          </div>
+        </div>
+      </section>
     </main>
 
     <nav class="bottom-nav">
@@ -424,6 +528,22 @@
         <span>Project</span>
       </div>
     </nav>
+  </div>
+
+  <div id="authModal" class="modal" aria-modal="true">
+    <div class="modal-card">
+      <button class="close-btn" id="closeAuthModal" aria-label="Tutup">×</button>
+      <div class="vip-mark">★</div>
+      <h3 id="authTitle">Masuk</h3>
+      <p id="authSubtitle">Akses editor foto dan video premium Anda.</p>
+      <div class="auth-form">
+        <input id="authName" class="input-field hidden" type="text" placeholder="Nama lengkap" />
+        <input id="authEmail" class="input-field" type="email" placeholder="Email" />
+        <input id="authPassword" class="input-field" type="password" placeholder="Password" />
+        <button id="submitAuthBtn" class="btn-primary">Masuk</button>
+        <div id="switchAuthMode" class="subtle-link">Belum punya akun? Daftar</div>
+      </div>
+    </div>
   </div>
 
   <div id="vipModal" class="modal" aria-modal="true">
@@ -458,29 +578,30 @@
 
   <script>
     const PREMIUM_HASH = '8a0e390013f09f238d987e9db2ec131bbe9d93067c008ca33d4f49809344d0f9';
+    const AUTH_KEY = 'yuzuki_auth_user';
+    const VIP_KEY = 'yuzuki_hd_premium_status';
+
     const state = {
-      activeScreen: 'home',
+      screen: 'home',
       mediaType: 'photo',
       sourceFile: null,
       sourceUrl: '',
-      originalUrl: '',
       isVideo: false,
       compareValue: 50,
-      preset: 'alami',
-      tab: 'enhance',
-      premium: localStorage.getItem('yuzuki_hd_premium_status') === 'open',
       selectedResolution: 720,
       selectedFps: 24,
       selectedFormat: 'webm',
       outputBlob: null,
-      previewReady: false,
-      activeExportName: 'yuzuki-hd-output'
+      authMode: 'login',
+      user: null,
+      premium: localStorage.getItem(VIP_KEY) === 'open'
     };
 
     const screens = {
       home: document.getElementById('homeScreen'),
       editor: document.getElementById('editorScreen'),
-      export: document.getElementById('exportScreen')
+      export: document.getElementById('exportScreen'),
+      profile: document.getElementById('profileScreen')
     };
 
     const prepareWorker = () => {
@@ -511,46 +632,158 @@
       const data = encoder.encode(input);
       const hashBuffer = await crypto.subtle.digest('SHA-256', data);
       const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
     }
 
-    function setActiveScreen(name) {
-      state.activeScreen = name;
+    function setScreen(name) {
+      state.screen = name;
       Object.entries(screens).forEach(([key, el]) => el.classList.toggle('active', key === name));
-      document.querySelectorAll('.nav-item').forEach((el) => el.classList.toggle('active', el.dataset.nav === 'home' && name === 'home'));
-    }
-
-    function isPremium() {
-      return localStorage.getItem('yuzuki_hd_premium_status') === 'open';
-    }
-
-    function updatePremiumUI() {
-      const premium = isPremium();
-      document.getElementById('vipTrigger').style.borderColor = premium ? 'rgba(255,183,3,0.6)' : 'rgba(255,255,255,0.08)';
-      document.getElementById('vipTrigger').style.color = premium ? 'var(--gold)' : 'var(--text-main)';
-      document.getElementById('quotaPill').textContent = premium ? 'Premium' : 'Standar';
-      document.getElementById('quotaPill').classList.toggle('unlimited', premium);
-      document.getElementById('quotaStatus').textContent = premium ? 'Akses full HD/4K tanpa batas foto.' : 'Mode standar dengan HD foto terbatas.';
-      document.querySelectorAll('[data-premium-only]').forEach((el) => {
-        const premiumLock = el.querySelector('.mini-lock');
-        if (premiumLock) premiumLock.textContent = premium ? '' : '🔒';
+      document.querySelectorAll('.nav-item').forEach((el) => {
+        el.classList.toggle('active', el.dataset.nav === 'home' && name === 'home');
       });
+    }
 
-      if (!premium) {
-        const resolutionButtons = [...document.querySelectorAll('[data-resolution]')];
-        resolutionButtons.forEach((btn) => {
-          const val = Number(btn.dataset.resolution || 720);
-          if (val >= 2160 || (val === 1440 && !premium)) {
-            btn.classList.add('locked');
-            btn.title = 'Butuh premium';
-          }
+    function readUser() {
+      try {
+        const raw = localStorage.getItem(AUTH_KEY);
+        state.user = raw ? JSON.parse(raw) : null;
+      } catch {
+        state.user = null;
+      }
+      renderAuthHeader();
+    }
+
+    function renderAuthHeader() {
+      const authActions = document.getElementById('authActions');
+      if (!state.user) {
+        authActions.innerHTML = `
+          <button class="auth-btn" id="loginBtn">Masuk</button>
+          <button class="auth-btn primary" id="registerBtn">Daftar</button>
+        `;
+        document.getElementById('loginBtn').addEventListener('click', () => openAuthModal('login'));
+        document.getElementById('registerBtn').addEventListener('click', () => openAuthModal('register'));
+      } else {
+        authActions.innerHTML = `
+          <button class="auth-btn" id="profileBtn">${state.user.name || 'User'}</button>
+        `;
+        document.getElementById('profileBtn').addEventListener('click', () => {
+          renderProfile();
+          setScreen('profile');
         });
       }
     }
 
+    function openAuthModal(mode) {
+      state.authMode = mode;
+      const modal = document.getElementById('authModal');
+      const title = document.getElementById('authTitle');
+      const subtitle = document.getElementById('authSubtitle');
+      const nameField = document.getElementById('authName');
+      const submitBtn = document.getElementById('submitAuthBtn');
+      const switchBtn = document.getElementById('switchAuthMode');
+
+      nameField.classList.toggle('hidden', mode === 'login');
+      title.textContent = mode === 'login' ? 'Masuk' : 'Daftar';
+      subtitle.textContent = mode === 'login' ? 'Akses editor foto dan video premium Anda.' : 'Buat akun baru untuk mulai edit lebih cepat.';
+      submitBtn.textContent = mode === 'login' ? 'Masuk' : 'Daftar';
+      switchBtn.textContent = mode === 'login' ? 'Belum punya akun? Daftar' : 'Sudah punya akun? Masuk';
+      modal.classList.add('open');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.remove('open');
+      document.getElementById('authFormReset')?.click?.();
+    }
+
+    function registerUser() {
+      const name = document.getElementById('authName').value.trim();
+      const email = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPassword').value;
+
+      if (!email || !password || (state.authMode === 'register' && !name)) {
+        setToast('Isi semua data terlebih dahulu');
+        return;
+      }
+
+      sha256(password).then((hash) => {
+        const user = {
+          name: name || email.split('@')[0],
+          email,
+          passwordHash: hash,
+          createdAt: new Date().toISOString()
+        };
+        localStorage.setItem(AUTH_KEY, JSON.stringify(user));
+        state.user = user;
+        renderAuthHeader();
+        closeAuthModal();
+        renderProfile();
+        setScreen('profile');
+        setToast('Akun berhasil dibuat');
+      }).catch(() => setToast('Gagal membuat akun'));
+    }
+
+    function loginUser() {
+      const email = document.getElementById('authEmail').value.trim();
+      const password = document.getElementById('authPassword').value;
+
+      if (!email || !password) {
+        setToast('Email dan password wajib diisi');
+        return;
+      }
+
+      const raw = localStorage.getItem(AUTH_KEY);
+      if (!raw) {
+        setToast('Akun belum terdaftar');
+        return;
+      }
+
+      const user = JSON.parse(raw);
+      if (user.email !== email) {
+        setToast('Email tidak ditemukan');
+        return;
+      }
+
+      sha256(password).then((hash) => {
+        if (hash === user.passwordHash) {
+          state.user = user;
+          renderAuthHeader();
+          closeAuthModal();
+          renderProfile();
+          setScreen('profile');
+          setToast('Berhasil masuk');
+        } else {
+          setToast('Password salah');
+        }
+      }).catch(() => setToast('Gagal masuk'));
+    }
+
+    function renderProfile() {
+      if (!state.user) return;
+      const profileName = document.getElementById('profileName');
+      const profileEmail = document.getElementById('profileEmail');
+      const profileAvatar = document.getElementById('profileAvatar');
+      const statQuota = document.getElementById('statQuota');
+      profileName.textContent = state.user.name || 'Pengguna';
+      profileEmail.textContent = state.user.email || 'user@example.com';
+      profileAvatar.textContent = (state.user.name || 'U').charAt(0).toUpperCase();
+      statQuota.textContent = state.premium ? 'Premium' : 'HD';
+    }
+
+    function isPremium() { return state.premium || localStorage.getItem(VIP_KEY) === 'open'; }
+
+    function updatePremiumUI() {
+      const premium = isPremium();
+      const quotaPill = document.getElementById('quotaPill');
+      const quotaStatus = document.getElementById('quotaStatus');
+      quotaPill.textContent = premium ? 'Premium' : 'Standar';
+      quotaPill.classList.toggle('unlimited', premium);
+      quotaStatus.textContent = premium ? 'Akses full HD/4K tanpa batas foto.' : 'Mode standar dengan HD foto terbatas.';
+      document.getElementById('vipTrigger').style.borderColor = premium ? 'rgba(255,183,3,0.6)' : 'rgba(255,255,255,0.08)';
+      document.getElementById('vipTrigger').style.color = premium ? 'var(--gold)' : 'var(--text-main)';
+    }
+
     function activatePremium() {
-      const input = document.getElementById('vipPassword');
-      const pass = input.value.trim();
+      const pass = document.getElementById('vipPassword').value.trim();
       if (!pass) {
         setToast('Masukkan password langganan');
         return;
@@ -558,15 +791,100 @@
 
       sha256(pass).then((hash) => {
         if (hash === PREMIUM_HASH) {
-          localStorage.setItem('yuzuki_hd_premium_status', 'open');
           state.premium = true;
+          localStorage.setItem(VIP_KEY, 'open');
           updatePremiumUI();
           document.getElementById('vipModal').classList.remove('open');
+          renderProfile();
           setToast('Premium aktif');
         } else {
           setToast('Password salah');
         }
-      }).catch(() => setToast('Gagal mengecek password'));
+      }).catch(() => setToast('Gagal memeriksa password'));
+    }
+
+    function openFilePicker(type) {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = type === 'video' ? 'video/*' : 'image/*';
+      input.onchange = (event) => {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        state.sourceFile = file;
+        state.isVideo = file.type.startsWith('video/');
+        state.sourceUrl = URL.createObjectURL(file);
+        setScreen('editor');
+        loadMediaPreview();
+      };
+      input.click();
+    }
+
+    function loadMediaPreview() {
+      const beforeImg = document.getElementById('beforeImg');
+      const beforeVideo = document.getElementById('beforeVideo');
+      const afterLayer = document.getElementById('afterLayer');
+      const placeholder = document.getElementById('placeholderPreview');
+      const videoMeta = document.getElementById('videoMeta');
+      const editorTitle = document.getElementById('editorTitle');
+
+      placeholder.classList.add('hidden');
+      if (state.isVideo) {
+        editorTitle.textContent = 'Video HD Editor';
+        beforeImg.classList.add('hidden');
+        beforeVideo.classList.remove('hidden');
+        beforeVideo.src = state.sourceUrl;
+        beforeVideo.muted = true;
+        beforeVideo.playsInline = true;
+        beforeVideo.loop = true;
+        beforeVideo.load();
+        beforeVideo.onloadedmetadata = () => {
+          const duration = Number.isFinite(beforeVideo.duration) ? beforeVideo.duration : 0;
+          videoMeta.textContent = duration ? formatSeconds(duration) : '0:00';
+          videoMeta.classList.remove('hidden');
+          beforeVideo.currentTime = 0;
+          beforeVideo.play().catch(() => {});
+          renderCompare();
+        };
+        beforeVideo.ontimeupdate = () => {
+          const duration = Number.isFinite(beforeVideo.duration) ? beforeVideo.duration : 0;
+          const current = Number.isFinite(beforeVideo.currentTime) ? beforeVideo.currentTime : 0;
+          if (duration > 0) videoMeta.textContent = `${formatSeconds(current)} / ${formatSeconds(duration)}`;
+        };
+        beforeVideo.onended = () => {
+          beforeVideo.currentTime = 0;
+          beforeVideo.play().catch(() => {});
+        };
+        afterLayer.innerHTML = '<video id="afterVideoPreview" playsinline muted loop style="width:100%;height:100%;object-fit:cover;display:block;background:#000"></video>';
+        const afterVideoPreview = document.getElementById('afterVideoPreview');
+        afterVideoPreview.src = state.sourceUrl;
+        afterVideoPreview.muted = true;
+        afterVideoPreview.playsInline = true;
+        afterVideoPreview.loop = true;
+        afterVideoPreview.load();
+        afterVideoPreview.play().catch(() => {});
+        afterLayer.classList.remove('hidden');
+      } else {
+        editorTitle.textContent = 'Foto HD Editor';
+        beforeVideo.classList.add('hidden');
+        beforeImg.classList.remove('hidden');
+        beforeImg.src = state.sourceUrl;
+        afterLayer.innerHTML = '<img id="afterImagePreview" src="' + state.sourceUrl + '" style="width:100%;height:100%;object-fit:cover;display:block;" />';
+        const afterImagePreview = document.getElementById('afterImagePreview');
+        afterImagePreview.style.filter = 'contrast(1.2) saturate(1.25) brightness(1.1)';
+        afterLayer.classList.remove('hidden');
+        videoMeta.classList.add('hidden');
+      }
+      setTimeout(() => {
+        renderCompare();
+        applyPreviewFilter();
+      }, 50);
+    }
+
+    function formatSeconds(value) {
+      const safe = Number.isFinite(value) ? Math.max(0, value) : 0;
+      const minutes = Math.floor(safe / 60);
+      const seconds = Math.round(safe % 60);
+      return `${minutes}:${String(seconds).padStart(2, '0')}`;
     }
 
     function renderCompare() {
@@ -574,12 +892,9 @@
       const beforeVideo = document.getElementById('beforeVideo');
       const afterLayer = document.getElementById('afterLayer');
       const handle = document.getElementById('sliderHandle');
-
-      const value = state.compareValue;
-      const x = (value / 100) * 100;
+      const x = (state.compareValue / 100) * 100;
       handle.style.left = `${x}%`;
       afterLayer.style.clipPath = `polygon(${x}% 0%, 100% 0%, 100% 100%, ${x}% 100%)`;
-      afterLayer.style.width = '100%';
       before.style.clipPath = 'inset(0 0 0 0)';
       beforeVideo.style.clipPath = 'inset(0 0 0 0)';
     }
@@ -591,7 +906,6 @@
       const sharp = Number(document.getElementById('sharpSlider').value || 28);
       const noise = Number(document.getElementById('noiseSlider').value || 18);
       const skin = Number(document.getElementById('skinSlider').value || 24);
-
       const filterValue = `contrast(${1 + sharp / 100 * 0.8}) saturate(${1 + sharp / 100 * 0.6}) brightness(${1 + noise / 100 * 0.12}) blur(${Math.max(0, (100 - skin) / 100 * 0.3)}px)`;
       before.style.filter = filterValue;
       beforeVideo.style.filter = filterValue;
@@ -618,107 +932,26 @@
       stage.classList.toggle('compare-mode', !visible);
     }
 
-    function showInput(type) {
-      state.mediaType = type;
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = type === 'photo' ? 'image/*' : 'video/*';
-      input.onchange = (event) => {
-        const file = event.target.files && event.target.files[0];
-        if (!file) return;
-        state.sourceFile = file;
-        state.isVideo = file.type.startsWith('video/');
-        state.sourceUrl = URL.createObjectURL(file);
-        state.originalUrl = state.sourceUrl;
-        state.previewReady = true;
-        showEditor();
-        loadSelectedMedia();
+    function setPreset(name) {
+      const presetMap = {
+        alami: { sharp: 28, noise: 18, skin: 24 },
+        halus: { sharp: 52, noise: 36, skin: 62 },
+        cinematic: { sharp: 46, noise: 30, skin: 22 },
+        cerah: { sharp: 32, noise: 12, skin: 20 },
+        hitamputih: { sharp: 35, noise: 16, skin: 12 },
+        vivid: { sharp: 60, noise: 20, skin: 28 }
       };
-      input.click();
-    }
-
-    function showEditor() {
-      setActiveScreen('editor');
-      document.getElementById('editorTitle').textContent = state.isVideo ? 'Video HD Editor' : 'Foto HD Editor';
-    }
-
-    function loadSelectedMedia() {
-      const beforeImg = document.getElementById('beforeImg');
-      const beforeVideo = document.getElementById('beforeVideo');
-      const afterLayer = document.getElementById('afterLayer');
-      const placeholder = document.getElementById('placeholderPreview');
-      const videoMeta = document.getElementById('videoMeta');
-
-      if (!state.sourceUrl) return;
-      placeholder.classList.add('hidden');
-
-      if (state.isVideo) {
-        beforeImg.classList.add('hidden');
-        beforeVideo.classList.remove('hidden');
-        beforeVideo.src = state.sourceUrl;
-        beforeVideo.muted = true;
-        beforeVideo.playsInline = true;
-        beforeVideo.loop = true;
-        beforeVideo.load();
-
-        beforeVideo.onloadedmetadata = () => {
-          const duration = Number.isFinite(beforeVideo.duration) ? beforeVideo.duration : 0;
-          const label = duration ? `${formatSeconds(duration)}` : '0:00';
-          videoMeta.textContent = label;
-          videoMeta.classList.remove('hidden');
-          beforeVideo.currentTime = 0;
-          beforeVideo.play().catch(() => {});
-          renderCompare();
-        };
-
-        beforeVideo.ontimeupdate = () => {
-          const duration = Number.isFinite(beforeVideo.duration) ? beforeVideo.duration : 0;
-          const current = Number.isFinite(beforeVideo.currentTime) ? beforeVideo.currentTime : 0;
-          if (duration > 0) videoMeta.textContent = `${formatSeconds(current)} / ${formatSeconds(duration)}`;
-        };
-
-        beforeVideo.onended = () => {
-          beforeVideo.currentTime = 0;
-          beforeVideo.play().catch(() => {});
-        };
-
-        afterLayer.innerHTML = '<video id="afterVideoPreview" playsinline muted loop style="width:100%;height:100%;object-fit:cover;display:block;background:#000"></video>';
-        const afterVideoPreview = document.getElementById('afterVideoPreview');
-        afterVideoPreview.src = state.sourceUrl;
-        afterVideoPreview.muted = true;
-        afterVideoPreview.playsInline = true;
-        afterVideoPreview.loop = true;
-        afterVideoPreview.load();
-        afterVideoPreview.play().catch(() => {});
-        afterLayer.classList.remove('hidden');
-      } else {
-        beforeVideo.classList.add('hidden');
-        beforeImg.classList.remove('hidden');
-        beforeImg.src = state.sourceUrl;
-        afterLayer.innerHTML = '<img id="afterImagePreview" src="' + state.sourceUrl + '" style="width:100%;height:100%;object-fit:cover;display:block;" />';
-        const afterImagePreview = document.getElementById('afterImagePreview');
-        afterImagePreview.style.filter = 'contrast(1.2) saturate(1.25) brightness(1.1)';
-        afterLayer.classList.remove('hidden');
-        videoMeta.classList.add('hidden');
-      }
-
-      setTimeout(() => {
-        renderCompare();
-        applyPreviewFilter();
-      }, 50);
-    }
-
-    function formatSeconds(value) {
-      const safe = Number.isFinite(value) ? Math.max(0, value) : 0;
-      const minutes = Math.floor(safe / 60);
-      const seconds = Math.round(safe % 60);
-      return `${minutes}:${String(seconds).padStart(2, '0')}`;
+      document.querySelectorAll('.preset').forEach((el) => el.classList.toggle('active', el.dataset.preset === name));
+      const config = presetMap[name] || presetMap.alami;
+      document.getElementById('sharpSlider').value = config.sharp;
+      document.getElementById('noiseSlider').value = config.noise;
+      document.getElementById('skinSlider').value = config.skin;
+      setSliderDisplay();
     }
 
     function setResolution(value) {
       const premium = isPremium();
-      const allowed = value === 2160 ? premium : true;
-      if (!allowed) {
+      if (value === 2160 && !premium) {
         setToast('4K hanya untuk Premium');
         return;
       }
@@ -730,36 +963,21 @@
 
     function setFps(value) {
       const premium = isPremium();
-      const allowed = value !== 60 || premium;
-      if (!allowed) {
+      if (value === 60 && !premium) {
         setToast('60 fps hanya untuk Premium');
         return;
       }
       state.selectedFps = value;
-      document.querySelectorAll('[data-fps]').forEach((el) => el.classList.toggle('selected', Number(el.dataset.fps) === value));
+      document.querySelectorAll('[data-fps]').forEach((el) => {
+        el.classList.toggle('selected', Number(el.dataset.fps) === value);
+      });
     }
 
     function setFormat(value) {
       state.selectedFormat = value;
-      document.querySelectorAll('[data-format]').forEach((el) => el.classList.toggle('selected', el.dataset.format === value));
-    }
-
-    function setPreset(name) {
-      state.preset = name;
-      document.querySelectorAll('.preset').forEach((el) => el.classList.toggle('active', el.dataset.preset === name));
-      const presetMap = {
-        alami: { sharp: 28, noise: 18, skin: 24 },
-        halus: { sharp: 52, noise: 36, skin: 62 },
-        cinematic: { sharp: 46, noise: 30, skin: 22 },
-        cerah: { sharp: 32, noise: 12, skin: 20 },
-        hitamputih: { sharp: 35, noise: 16, skin: 12 },
-        vivid: { sharp: 60, noise: 20, skin: 28 }
-      };
-      const config = presetMap[name] || presetMap.alami;
-      document.getElementById('sharpSlider').value = config.sharp;
-      document.getElementById('noiseSlider').value = config.noise;
-      document.getElementById('skinSlider').value = config.skin;
-      setSliderDisplay();
+      document.querySelectorAll('[data-format]').forEach((el) => {
+        el.classList.toggle('selected', el.dataset.format === value);
+      });
     }
 
     function updateProgress(percent, label) {
@@ -767,49 +985,36 @@
       const text = document.getElementById('progressText');
       const wrap = document.getElementById('progressWrap');
       fill.style.width = `${percent}%`;
-      text.textContent = `${percent}%`;
-      if (label) text.textContent = `${percent}% • ${label}`;
+      text.textContent = label ? `${percent}% • ${label}` : `${percent}%`;
       wrap.style.display = 'block';
     }
 
     function hideProgress() {
-      const wrap = document.getElementById('progressWrap');
-      wrap.style.display = 'none';
-    }
-
-    function showExportScreen() {
-      setActiveScreen('export');
-      document.getElementById('exportDoneBox').style.display = 'none';
+      document.getElementById('progressWrap').style.display = 'none';
     }
 
     function exportAndDownload() {
       if (!state.sourceFile) {
-        setToast('Pilih file dulu');
+        setToast('Pilih file terlebih dahulu');
         return;
       }
-
-      if (state.isVideo) {
-        exportVideoFile();
-      } else {
-        exportImageFile();
-      }
+      if (state.isVideo) exportVideo(); else exportImage();
     }
 
-    function exportImageFile() {
+    function exportImage() {
       const img = new Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
-        const width = state.selectedResolution || 1080;
-        const scale = width / Math.max(img.width, img.height);
+        const targetWidth = state.selectedResolution || 1080;
+        const scale = targetWidth / Math.max(img.width, img.height);
         canvas.width = Math.round(img.width * scale);
         canvas.height = Math.round(img.height * scale);
         ctx.filter = `contrast(${1 + Number(document.getElementById('sharpSlider').value) / 100 * 0.9}) saturate(${1 + Number(document.getElementById('sharpSlider').value) / 100 * 0.8}) brightness(${1 + Number(document.getElementById('noiseSlider').value) / 100 * 0.18}) blur(${Math.max(0, 0.4 - Number(document.getElementById('skinSlider').value) / 100) / 2}px)`;
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
         canvas.toBlob((blob) => {
           if (!blob) {
-            setToast('Gagal menghasilkan foto');
+            setToast('Gagal membuat file gambar');
             return;
           }
           state.outputBlob = blob;
@@ -819,15 +1024,19 @@
           a.download = 'yuzuki-photo-upscaled.jpg';
           a.click();
           URL.revokeObjectURL(url);
-          const done = document.getElementById('exportDoneBox');
-          done.style.display = 'block';
+          document.getElementById('exportDoneBox').style.display = 'block';
           setToast('Foto berhasil disimpan');
         }, 'image/jpeg', 0.92);
       };
       img.src = state.sourceUrl;
     }
 
-    async function exportVideoFile() {
+    function pickVideoMime() {
+      const candidates = ['video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'];
+      return candidates.find((type) => MediaRecorder.isTypeSupported(type)) || '';
+    }
+
+    async function exportVideo() {
       const videoEl = document.createElement('video');
       videoEl.src = state.sourceUrl;
       videoEl.muted = true;
@@ -844,26 +1053,19 @@
         const width = state.selectedResolution === 2160 ? 3840 : state.selectedResolution === 1440 ? 2560 : state.selectedResolution === 1080 ? 1920 : 1280;
         const height = Math.round((videoEl.videoHeight / videoEl.videoWidth) * width);
         const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = width; canvas.height = height;
         const ctx = canvas.getContext('2d');
-        ctx.imageSmoothingEnabled = true;
-
         const mimeType = pickVideoMime();
         const stream = canvas.captureStream(state.selectedFps);
         const recorder = new MediaRecorder(stream, mimeType ? { mimeType } : undefined);
         const chunks = [];
 
-        recorder.ondataavailable = (e) => {
-          if (e.data && e.data.size > 0) chunks.push(e.data);
-        };
-
+        recorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) chunks.push(e.data); };
         recorder.onstop = () => {
           const blob = new Blob(chunks, { type: mimeType || 'video/webm' });
           state.outputBlob = blob;
           const downloadUrl = URL.createObjectURL(blob);
-          const done = document.getElementById('exportDoneBox');
-          done.style.display = 'block';
+          document.getElementById('exportDoneBox').style.display = 'block';
           document.getElementById('downloadBtn').onclick = () => {
             const a = document.createElement('a');
             a.href = downloadUrl;
@@ -875,19 +1077,15 @@
           hideProgress();
         };
 
-        const duration = Number.isFinite(videoEl.duration) ? videoEl.duration : 0;
-        const startAt = 0;
-        let frameCount = 0;
-
         function renderFrame() {
           const current = videoEl.currentTime;
+          const duration = Number.isFinite(videoEl.duration) ? videoEl.duration : 0;
           const sharp = Number(document.getElementById('sharpSlider').value || 28);
           const noise = Number(document.getElementById('noiseSlider').value || 18);
           const skin = Number(document.getElementById('skinSlider').value || 24);
           ctx.filter = `contrast(${1 + sharp / 100 * 0.75}) saturate(${1 + sharp / 100 * 0.6}) brightness(${1 + noise / 100 * 0.1}) blur(${Math.max(0, (100 - skin) / 100 * 0.4)}px)`;
           ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
-          frameCount += 1;
-          const pct = duration > 0 ? Math.min(100, (current / duration) * 100) : (frameCount / Math.max(1, state.selectedFps * 3)) * 100;
+          const pct = duration > 0 ? Math.min(100, (current / duration) * 100) : 0;
           if (duration > 0) updateProgress(Math.round(pct), 'Rendering');
           if (videoEl.currentTime >= duration - 0.05) {
             recorder.stop();
@@ -896,17 +1094,9 @@
           requestAnimationFrame(renderFrame);
         }
 
-        worker.postMessage({ type: 'progress', progress: 0, total: 100 });
-        worker.onmessage = (event) => {
-          if (event.data && event.data.type === 'progress') {
-            updateProgress(event.data.value, 'Proses');
-          }
-        };
-
-        videoEl.onloadeddata = async () => {
+        videoEl.onloadeddata = () => {
           updateProgress(5, 'Siap');
           recorder.start(200);
-          videoEl.currentTime = startAt;
           videoEl.play().then(() => {
             requestAnimationFrame(renderFrame);
           }).catch(() => {
@@ -921,102 +1111,114 @@
       }
     }
 
-    function pickVideoMime() {
-      const candidates = [
-        'video/webm;codecs=vp9,opus',
-        'video/webm;codecs=vp8,opus',
-        'video/webm'
-      ];
-      return candidates.find((type) => MediaRecorder.isTypeSupported(type)) || '';
-    }
+    document.getElementById('loginBtn').addEventListener('click', () => openAuthModal('login'));
+    document.getElementById('registerBtn').addEventListener('click', () => openAuthModal('register'));
+    document.getElementById('switchAuthMode').addEventListener('click', () => {
+      const next = state.authMode === 'login' ? 'register' : 'login';
+      openAuthModal(next);
+    });
+    document.getElementById('submitAuthBtn').addEventListener('click', () => {
+      if (state.authMode === 'register') registerUser(); else loginUser();
+    });
+    document.getElementById('closeAuthModal').addEventListener('click', closeAuthModal);
 
     document.getElementById('vipTrigger').addEventListener('click', () => {
       document.getElementById('vipModal').classList.add('open');
     });
-
     document.getElementById('closeVipModal').addEventListener('click', () => {
       document.getElementById('vipModal').classList.remove('open');
     });
-
     document.getElementById('activateVipBtn').addEventListener('click', activatePremium);
-    document.getElementById('loginBtn').addEventListener('click', () => setToast('Fitur masuk siap dibuat'));
-    document.getElementById('registerBtn').addEventListener('click', () => setToast('Fitur daftar siap dibuat'));
-    document.getElementById('addPhotoBtn').addEventListener('click', () => showInput('photo'));
-    document.getElementById('addVideoBtn').addEventListener('click', () => showInput('video'));
 
+    document.getElementById('addPhotoBtn').addEventListener('click', () => openFilePicker('photo'));
+    document.getElementById('addVideoBtn').addEventListener('click', () => openFilePicker('video'));
+    document.getElementById('bannerCard').addEventListener('click', () => openFilePicker('photo'));
     document.querySelectorAll('[data-open-editor]').forEach((btn) => {
       btn.addEventListener('click', () => {
-        state.mediaType = btn.dataset.mediaType || 'photo';
-        showInput(state.mediaType);
+        const type = btn.dataset.mediaType || 'photo';
+        openFilePicker(type);
       });
     });
 
-    document.getElementById('backHomeBtn').addEventListener('click', () => setActiveScreen('home'));
-    document.getElementById('backEditorBtn').addEventListener('click', () => setActiveScreen('editor'));
-    document.getElementById('exportBtn').addEventListener('click', () => showExportScreen());
+    document.getElementById('backHomeBtn').addEventListener('click', () => setScreen('home'));
+    document.getElementById('backEditorBtn').addEventListener('click', () => setScreen('editor'));
+    document.getElementById('backFromProfileBtn').addEventListener('click', () => setScreen('home'));
+    document.getElementById('exportBtn').addEventListener('click', () => setScreen('export'));
     document.getElementById('startExportBtn').addEventListener('click', exportAndDownload);
     document.getElementById('downloadBtn').addEventListener('click', () => {
       if (state.outputBlob) {
+        const format = state.isVideo ? (state.selectedFormat === 'mp4' ? 'mp4' : 'webm') : (state.selectedFormat === 'png' ? 'png' : 'jpg');
         const a = document.createElement('a');
         const url = URL.createObjectURL(state.outputBlob);
         a.href = url;
-        a.download = `yuzuki-${state.isVideo ? 'video' : 'photo'}-${Date.now()}.` + (state.isVideo ? (state.selectedFormat === 'mp4' ? 'mp4' : 'webm') : state.selectedFormat === 'png' ? 'png' : 'jpg');
+        a.download = `yuzuki-${state.isVideo ? 'video' : 'photo'}-${Date.now()}.${format}`;
         a.click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
       }
     });
 
     document.getElementById('compareToggle').addEventListener('click', toggleCompare);
-    document.getElementById('bannerCard').addEventListener('click', () => showInput('photo'));
-
-    document.getElementById('sharpSlider').addEventListener('input', setSliderDisplay);
-    document.getElementById('noiseSlider').addEventListener('input', setSliderDisplay);
-    document.getElementById('skinSlider').addEventListener('input', setSliderDisplay);
     document.getElementById('applyEnhanceBtn').addEventListener('click', () => {
       applyPreviewFilter();
       setToast('Efek halus diterapkan');
     });
 
-    document.querySelectorAll('.tab-btn').forEach((btn) => btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab-btn').forEach((b) => b.classList.toggle('active', b === btn));
-      state.tab = btn.dataset.tab;
-    }));
+    document.getElementById('sharpSlider').addEventListener('input', setSliderDisplay);
+    document.getElementById('noiseSlider').addEventListener('input', setSliderDisplay);
+    document.getElementById('skinSlider').addEventListener('input', setSliderDisplay);
 
-    document.querySelectorAll('.preset').forEach((btn) => btn.addEventListener('click', () => setPreset(btn.dataset.preset)));
+    document.querySelectorAll('.preset').forEach((btn) => {
+      btn.addEventListener('click', () => setPreset(btn.dataset.preset));
+    });
 
-    document.querySelectorAll('[data-resolution]').forEach((btn) => btn.addEventListener('click', () => setResolution(Number(btn.dataset.resolution))));
-    document.querySelectorAll('[data-fps]').forEach((btn) => btn.addEventListener('click', () => setFps(Number(btn.dataset.fps))));
-    document.querySelectorAll('[data-format]').forEach((btn) => btn.addEventListener('click', () => setFormat(btn.dataset.format)));
+    document.querySelectorAll('[data-resolution]').forEach((btn) => {
+      btn.addEventListener('click', () => setResolution(Number(btn.dataset.resolution)));
+    });
+    document.querySelectorAll('[data-fps]').forEach((btn) => {
+      btn.addEventListener('click', () => setFps(Number(btn.dataset.fps)));
+    });
+    document.querySelectorAll('[data-format]').forEach((btn) => {
+      btn.addEventListener('click', () => setFormat(btn.dataset.format));
+    });
 
-    document.querySelectorAll('.nav-item').forEach((nav) => nav.addEventListener('click', () => {
-      const key = nav.dataset.nav;
-      if (key === 'home') setActiveScreen('home');
-      if (key === 'project') setActiveScreen('export');
-      if (key === 'template') setToast('Template belum aktif');
-    }));
+    document.querySelectorAll('.nav-item').forEach((nav) => {
+      nav.addEventListener('click', () => {
+        const key = nav.dataset.nav;
+        if (key === 'home') setScreen('home');
+        if (key === 'project') {
+          if (state.user) {
+            renderProfile();
+            setScreen('profile');
+          } else {
+            openAuthModal('login');
+          }
+        }
+        if (key === 'template') setToast('Template muncul di update berikutnya');
+      });
+    });
+
+    document.getElementById('profileSettingsBtn').addEventListener('click', () => setToast('Setelan profil siap dibuat'));
 
     document.getElementById('compareStage').addEventListener('pointerdown', (event) => {
       const rect = event.currentTarget.getBoundingClientRect();
-      const next = ((event.clientX - rect.left) / rect.width) * 100;
-      state.compareValue = Math.max(0, Math.min(100, next));
+      state.compareValue = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
       renderCompare();
     });
-
     document.getElementById('compareStage').addEventListener('pointermove', (event) => {
       if (event.pressure === 0 && event.buttons === 0) return;
       const rect = event.currentTarget.getBoundingClientRect();
-      const next = ((event.clientX - rect.left) / rect.width) * 100;
-      state.compareValue = Math.max(0, Math.min(100, next));
+      state.compareValue = Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100));
       renderCompare();
     });
 
+    readUser();
     updatePremiumUI();
-    setSliderDisplay();
+    renderProfile();
     setPreset('alami');
     setResolution(720);
     setFps(24);
     setFormat('webm');
-    setActiveScreen('home');
+    setScreen('home');
     renderCompare();
   </script>
 </body>
