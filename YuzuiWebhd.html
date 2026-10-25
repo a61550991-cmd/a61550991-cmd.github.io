@@ -51,6 +51,9 @@
     .vip-badge { display: none; align-items: center; gap: 4px; padding: 5px 10px; border-radius: 999px; background: linear-gradient(135deg, var(--gold), #ff8c00); color: #0d0909; font-size: 10px; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase; box-shadow: var(--shadow-gold); }
     .vip-badge.visible { display: inline-flex; }
     .top-actions { display: flex; align-items: center; gap: 10px; }
+    .auth-actions { display: flex; align-items: center; gap: 8px; margin-right: 6px; }
+    .auth-btn { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); color: var(--text-main); border-radius: 999px; padding: 7px 10px; font-size: 10px; font-weight: 800; cursor: pointer; }
+    .auth-btn.primary { background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(255, 0, 60, 0.12)); border-color: rgba(255,183,3,0.45); color: var(--gold); }
     .icon-btn { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: rgba(255,255,255,0.02); color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease; touch-action: manipulation; position: relative; }
     .icon-btn:active { transform: scale(0.95); border-color: var(--red-primary); }
     .icon-btn.vip-trigger { background: linear-gradient(135deg, rgba(255, 183, 3, 0.18), rgba(255, 0, 60, 0.12)); border-color: rgba(255, 183, 3, 0.48); color: var(--gold); box-shadow: 0 0 14px rgba(255, 183, 3, 0.14); }
@@ -65,6 +68,11 @@
     .banner-title { font-size: 17px; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 5px; }
     .banner-desc { color: var(--text-muted); font-size: 12px; line-height: 1.45; margin-bottom: 12px; max-width: 300px; }
     .banner-btn { border: none; border-radius: 14px; padding: 8px 16px; background: linear-gradient(135deg, var(--red-primary), #8d0026); color: #fff; font-size: 12px; font-weight: 900; box-shadow: 0 9px 18px rgba(255, 0, 60, 0.42); cursor: pointer; }
+
+    .upload-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0 0 18px; }
+    .upload-btn { border: 1px solid rgba(255, 0, 60, 0.18); background: linear-gradient(155deg, rgba(31, 5, 14, 1) 0%, rgba(15, 3, 6, 1) 100%); border-radius: var(--radius-md); padding: 12px 10px; color: #fff; font-weight: 800; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .upload-btn.primary { background: linear-gradient(135deg, var(--red-primary), #8d0026); box-shadow: var(--shadow-red); }
+    .upload-btn.gold { background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 0, 60, 0.14)); border-color: rgba(255,183,3,0.35); color: var(--gold); }
 
     .quota-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: rgba(19, 8, 13, 0.96); border: 1px solid rgba(255, 0, 60, 0.18); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 18px; }
     .quota-info { min-width: 0; }
@@ -202,6 +210,10 @@
         <span>Yuzuki</span>
       </div>
       <div class="top-actions">
+        <div class="auth-actions">
+          <button class="auth-btn" id="loginBtn">Masuk</button>
+          <button class="auth-btn primary" id="registerBtn">Daftar</button>
+        </div>
         <button class="icon-btn vip-trigger" id="vipTrigger" aria-label="VIP">★</button>
         <button class="icon-btn" id="settingsBtn" aria-label="Pengaturan">⚙</button>
       </div>
@@ -214,6 +226,11 @@
           <div class="banner-title">Upscale foto & video HD/4K</div>
           <div class="banner-desc">Hasil lebih halus, natural, dan siap dibagikan ke TikTok, Reels, WhatsApp, dan galeri.</div>
           <button class="banner-btn">Coba sekarang</button>
+        </div>
+
+        <div class="upload-strip">
+          <button class="upload-btn primary" id="addPhotoBtn">＋ Foto</button>
+          <button class="upload-btn gold" id="addVideoBtn">＋ Video</button>
         </div>
 
         <div class="quota-card">
@@ -860,7 +877,6 @@
 
         const duration = Number.isFinite(videoEl.duration) ? videoEl.duration : 0;
         const startAt = 0;
-        let rendered = 0;
         let frameCount = 0;
 
         function renderFrame() {
@@ -871,7 +887,6 @@
           ctx.filter = `contrast(${1 + sharp / 100 * 0.75}) saturate(${1 + sharp / 100 * 0.6}) brightness(${1 + noise / 100 * 0.1}) blur(${Math.max(0, (100 - skin) / 100 * 0.4)}px)`;
           ctx.drawImage(videoEl, 0, 0, canvas.width, canvas.height);
           frameCount += 1;
-          rendered += 1;
           const pct = duration > 0 ? Math.min(100, (current / duration) * 100) : (frameCount / Math.max(1, state.selectedFps * 3)) * 100;
           if (duration > 0) updateProgress(Math.round(pct), 'Rendering');
           if (videoEl.currentTime >= duration - 0.05) {
@@ -924,6 +939,10 @@
     });
 
     document.getElementById('activateVipBtn').addEventListener('click', activatePremium);
+    document.getElementById('loginBtn').addEventListener('click', () => setToast('Fitur masuk siap dibuat'));
+    document.getElementById('registerBtn').addEventListener('click', () => setToast('Fitur daftar siap dibuat'));
+    document.getElementById('addPhotoBtn').addEventListener('click', () => showInput('photo'));
+    document.getElementById('addVideoBtn').addEventListener('click', () => showInput('video'));
 
     document.querySelectorAll('[data-open-editor]').forEach((btn) => {
       btn.addEventListener('click', () => {
