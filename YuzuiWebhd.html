@@ -1,312 +1,270 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Yuzuki HD – Foto & Video 5K</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Yuzuki HD – Foto & Video 4K/5K</title>
   <style>
     :root {
       --bg-void: #030103;
-      --bg-dark: #0a0306;
       --bg-card: #120409;
-      --bg-card-light: #1c0810;
-      
-      /* Crimson Neon */
+      --bg-card-light: #1d0911;
       --red-primary: #ff003c;
       --red-glow: rgba(255, 0, 60, 0.45);
       --red-accent: #ff2a5f;
       --red-border: rgba(255, 0, 60, 0.32);
-      
-      /* VIP Emas */
-      --accent-gold: #ffb703;
-      --accent-gold-glow: rgba(255, 183, 3, 0.5);
-      
-      --danger: #ff3344;
-      --success: #00e676;
+      --gold: #ffb703;
+      --gold-soft: rgba(255, 183, 3, 0.2);
+      --danger: #ff4d67;
+      --success: #00d98b;
       --text-main: #ffffff;
       --text-muted: #a18e95;
       --border-line: rgba(255, 255, 255, 0.08);
-      
       --radius-sm: 10px;
       --radius-md: 16px;
-      --radius-lg: 24px;
-      --shadow-red: 0 10px 30px rgba(255, 0, 60, 0.35);
+      --radius-lg: 28px;
+      --shadow-red: 0 12px 36px rgba(255, 0, 60, 0.35);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
-    body {
-      background-color: var(--bg-void);
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-void);
       color: var(--text-main);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
       overflow-x: hidden;
     }
 
-    #app-container {
+    body {
+      display: flex;
+      justify-content: center;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    #app {
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
-      background: radial-gradient(circle at 50% 0%, #2b030f 0%, #0d0206 42%, #030103 100%);
-      display: flex;
-      flex-direction: column;
+      background: radial-gradient(circle at top, rgba(140, 0, 31, 0.18), transparent 30%), linear-gradient(180deg, #0d0206 0%, #030103 100%);
       position: relative;
-      box-shadow: 0 0 65px rgba(0, 0, 0, 0.98);
-      padding-bottom: 74px;
+      box-shadow: 0 0 80px rgba(0, 0, 0, 0.94);
+      overflow: hidden;
     }
 
-    /* Status Bar Android */
     .status-bar {
       height: 28px;
-      padding: 6px 18px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
+      padding: 4px 18px 0;
       font-size: 11px;
-      font-weight: 700;
       color: var(--text-muted);
-      z-index: 50;
-      pointer-events: none;
-    }
-    .status-bar .icons {
-      display: flex;
-      gap: 7px;
-      align-items: center;
+      font-weight: 700;
+      z-index: 10;
+      position: relative;
     }
 
-    /* Top Bar */
-    .top-bar {
-      padding: 10px 18px 14px;
+    .status-icons {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: rgba(10, 3, 6, 0.92);
+      gap: 7px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px 12px;
+      background: rgba(10, 2, 5, 0.94);
+      border-bottom: 1px solid rgba(255, 0, 60, 0.2);
       backdrop-filter: blur(18px);
       position: sticky;
       top: 0;
-      z-index: 40;
-      border-bottom: 1px solid rgba(255, 0, 60, 0.2);
+      z-index: 30;
     }
-    .brand-title {
+
+    .brand {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 900;
-      background: linear-gradient(135deg, #ffffff 40%, var(--red-primary) 100%);
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #ffffff 30%, var(--red-primary) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
     }
-    .brand-title .badge-vip {
-      font-size: 10px;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #ffb703, #ff4500);
-      color: #000;
-      -webkit-text-fill-color: #000;
-      box-shadow: 0 0 14px var(--accent-gold-glow);
+
+    .vip-badge {
       display: none;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #ffb703, #ff7b00);
+      color: #000;
+      font-size: 10px;
+      font-weight: 900;
     }
+
     .top-actions {
       display: flex;
       align-items: center;
       gap: 10px;
     }
+
     .icon-btn {
       width: 38px;
       height: 38px;
       border-radius: 50%;
       background: var(--bg-card);
       border: 1px solid var(--border-line);
+      color: var(--text-main);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-main);
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: transform 0.18s ease, border-color 0.18s ease;
       touch-action: manipulation;
     }
+
     .icon-btn:active {
-      transform: scale(0.92);
+      transform: scale(0.94);
       border-color: var(--red-primary);
     }
+
     .icon-btn.vip-trigger {
-      background: linear-gradient(135deg, rgba(255, 183, 3, 0.15), rgba(255, 0, 60, 0.2));
-      border: 1px solid var(--accent-gold);
-      color: var(--accent-gold);
-      box-shadow: 0 0 12px rgba(255, 183, 3, 0.25);
+      background: linear-gradient(135deg, rgba(255, 183, 3, 0.2), rgba(255, 0, 60, 0.18));
+      border-color: rgba(255, 183, 3, 0.5);
+      color: var(--gold);
+      box-shadow: 0 0 12px rgba(255, 183, 3, 0.24);
     }
 
-    /* Screen Views */
     .screen {
       display: none;
-      flex: 1;
+      flex-direction: column;
+      padding: 14px 16px 86px;
+      animation: fadeIn 0.25s ease;
       overflow-y: auto;
-      padding: 14px 16px 24px;
-      animation: fadeIn 0.25s ease-out;
-      z-index: 10;
     }
+
     .screen.active {
       display: flex;
-      flex-direction: column;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Banner Promo */
-    .banner-promo {
+    .banner {
       background: linear-gradient(145deg, #2b0410 0%, #170308 50%, #0d0105 100%);
       border: 1px solid var(--red-border);
       border-radius: var(--radius-md);
       padding: 16px 18px;
-      position: relative;
-      overflow: hidden;
       margin-bottom: 18px;
       box-shadow: var(--shadow-red);
       cursor: pointer;
-      touch-action: manipulation;
-    }
-    .banner-promo::after {
-      content: '';
-      position: absolute;
-      right: -25px;
-      top: -25px;
-      width: 120px;
-      height: 120px;
-      background: radial-gradient(circle, rgba(255, 0, 60, 0.4) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .banner-tag {
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--accent-gold);
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .banner-title {
-      font-size: 16px;
-      font-weight: 900;
-      margin-bottom: 4px;
-      color: #fff;
-    }
-    .banner-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.4;
-      margin-bottom: 12px;
-    }
-    .banner-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 800;
-      color: #fff;
-      background: linear-gradient(135deg, var(--red-primary), #8f0020);
-      padding: 8px 16px;
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(255, 0, 60, 0.45);
-      border: none;
-      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Quota Card */
+    .banner::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: -20px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(255, 0, 60, 0.4), transparent 68%);
+      pointer-events: none;
+    }
+
+    .banner-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .banner-title {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .banner-desc {
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .banner-btn {
+      border: none;
+      border-radius: 18px;
+      padding: 8px 16px;
+      background: linear-gradient(135deg, var(--red-primary), #8b0023);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(255, 0, 60, 0.5);
+    }
+
     .quota-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       background: var(--bg-card);
       border: 1px solid rgba(255, 0, 60, 0.18);
       border-radius: var(--radius-md);
       padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       margin-bottom: 18px;
     }
-    .quota-info { font-size: 13px; }
-    .quota-info span {
-      color: var(--text-muted);
-      font-size: 11px;
+
+    .quota-info strong {
       display: block;
-      margin-top: 2px;
-    }
-    .quota-pill {
-      font-size: 12px;
-      font-weight: 800;
-      color: var(--red-accent);
-      background: rgba(255, 0, 60, 0.12);
-      padding: 5px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 0, 60, 0.3);
-    }
-    .quota-pill.unlimited {
-      color: var(--accent-gold);
-      background: rgba(255, 183, 3, 0.12);
-      border-color: rgba(255, 183, 3, 0.4);
+      font-size: 14px;
     }
 
-    /* Action Media */
-    .quick-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-    .btn-media {
-      background: linear-gradient(155deg, #1f050e, #0f0206);
-      border: 1px solid var(--red-border);
-      padding: 18px 14px;
-      border-radius: var(--radius-md);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      touch-action: manipulation;
-    }
-    .btn-media:active {
-      transform: scale(0.97);
-      border-color: var(--red-primary);
-      box-shadow: 0 0 18px var(--red-glow);
-    }
-    .btn-media .icon-wrapper {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--red-primary), #610014);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 18px var(--red-glow);
-      pointer-events: none;
-    }
-    .btn-media span {
-      font-size: 14px;
-      font-weight: 800;
-      pointer-events: none;
-    }
-    .btn-media small {
+    .quota-info span {
+      display: block;
+      margin-top: 4px;
       font-size: 11px;
       color: var(--text-muted);
-      pointer-events: none;
+    }
+
+    .quota-pill {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 0, 60, 0.25);
+      background: rgba(255, 0, 60, 0.12);
+      color: var(--red-accent);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .quota-pill.unlimited {
+      border-color: rgba(255, 183, 3, 0.35);
+      background: rgba(255, 183, 3, 0.12);
+      color: var(--gold);
     }
 
     .section-header {
@@ -315,61 +273,119 @@
       justify-content: space-between;
       margin-bottom: 12px;
     }
+
     .section-title {
       font-size: 15px;
       font-weight: 800;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.02em;
     }
+
     .section-subtitle {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-muted);
     }
 
-    /* Grid Tools */
-    .tools-grid {
+    .quick-actions {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 22px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
     }
+
+    .btn-media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 130px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--red-border);
+      background: linear-gradient(155deg, #1f050e, #0f0206);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+      touch-action: manipulation;
+    }
+
+    .btn-media:active {
+      transform: scale(0.98);
+      border-color: var(--red-primary);
+      box-shadow: 0 0 18px var(--red-glow);
+    }
+
+    .icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--red-primary), #610014);
+      box-shadow: 0 6px 20px var(--red-glow);
+    }
+
+    .btn-media span {
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .btn-media small {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
     .tool-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-line);
-      border-radius: var(--radius-sm);
-      padding: 12px 12px;
+      position: relative;
       display: flex;
       align-items: center;
       gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      padding: 12px;
       cursor: pointer;
-      position: relative;
-      transition: all 0.2s ease;
+      transition: border-color 0.18s ease, background 0.18s ease;
       touch-action: manipulation;
     }
+
     .tool-card:active {
-      background: var(--bg-card-light);
       border-color: var(--red-primary);
+      background: var(--bg-card-light);
     }
+
+    .tool-card.premium {
+      background: linear-gradient(180deg, rgba(22, 7, 10, 0.9), var(--bg-card));
+    }
+
     .tool-icon {
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: rgba(255, 0, 60, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(255, 0, 60, 0.08);
       color: var(--red-accent);
       flex-shrink: 0;
-      pointer-events: none;
     }
-    .tool-card.premium-tool .tool-icon {
-      color: var(--accent-gold);
-      background: rgba(255, 183, 3, 0.08);
+
+    .tool-card.premium .tool-icon {
+      background: rgba(255, 183, 3, 0.1);
+      color: var(--gold);
     }
-    .tool-details {
-      flex: 1;
+
+    .tool-meta {
       min-width: 0;
-      pointer-events: none;
+      flex: 1;
     }
+
     .tool-name {
       font-size: 12px;
       font-weight: 800;
@@ -377,10 +393,13 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .tool-tag {
       font-size: 10px;
       color: var(--text-muted);
+      margin-top: 2px;
     }
+
     .lock-badge {
       position: absolute;
       top: 8px;
@@ -392,89 +411,94 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--accent-gold);
-      pointer-events: none;
+      color: var(--gold);
+      font-size: 10px;
     }
 
-    /* Bottom Nav */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      max-width: 480px;
-      height: 64px;
-      background: rgba(6, 2, 4, 0.96);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid rgba(255, 0, 60, 0.2);
+    .editor-header {
       display: flex;
-      justify-content: space-around;
       align-items: center;
-      z-index: 50;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
     }
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 700;
-      transition: all 0.2s;
+
+    .editor-title {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-align: center;
       flex: 1;
-      touch-action: manipulation;
-    }
-    .nav-item.active {
-      color: var(--red-primary);
-    }
-    .nav-item.active svg {
-      stroke: var(--red-primary);
-      filter: drop-shadow(0 0 8px var(--red-primary));
     }
 
-    /* Slider Container */
     .editor-viewport {
       width: 100%;
       height: 380px;
       background: #000;
       border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 0, 60, 0.28);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.65);
       position: relative;
       overflow: hidden;
-      border: 1px solid var(--red-border);
       margin-bottom: 14px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .comparison-container {
+
+    .compare-stage {
       position: relative;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       touch-action: none;
     }
-    .comparison-img {
+
+    .media-item {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: contain;
       pointer-events: none;
+      background: #000;
     }
+
     .enhanced-layer {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       overflow: hidden;
       clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+      pointer-events: none;
     }
+
+    .label-badge {
+      position: absolute;
+      bottom: 12px;
+      padding: 5px 8px;
+      background: rgba(0, 0, 0, 0.66);
+      border-radius: 7px;
+      font-size: 10px;
+      font-weight: 800;
+      color: #fff;
+      z-index: 12;
+      user-select: none;
+    }
+
+    .label-before { left: 12px; }
+    .label-after { right: 12px; border: 1px solid rgba(255, 0, 60, 0.25); color: var(--red-accent); }
+
+    .watermark {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: 4px 7px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.44);
+      font-size: 10px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.55);
+      z-index: 13;
+      user-select: none;
+    }
+
     .slider-handle {
       position: absolute;
       top: 0;
@@ -482,10 +506,11 @@
       left: 50%;
       width: 2px;
       background: #fff;
-      box-shadow: 0 0 14px var(--red-primary);
-      cursor: ew-resize;
+      box-shadow: 0 0 14px rgba(255, 0, 60, 0.6);
       z-index: 20;
+      cursor: ew-resize;
     }
+
     .slider-knob {
       position: absolute;
       top: 50%;
@@ -499,40 +524,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 16px var(--red-glow);
+      font-size: 11px;
       font-weight: 900;
-      font-size: 11px;
-    }
-    .label-badge {
-      position: absolute;
-      bottom: 12px;
-      padding: 4px 8px;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 6px;
-      font-size: 10px;
-      font-weight: 800;
-      color: #fff;
-      z-index: 10;
-      pointer-events: none;
-    }
-    .label-before { left: 12px; }
-    .label-after { right: 12px; color: var(--red-accent); border: 1px solid rgba(255, 0, 60, 0.4); }
-
-    .watermark-overlay {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      font-size: 11px;
-      font-weight: 800;
-      color: rgba(255, 255, 255, 0.45);
-      pointer-events: none;
-      z-index: 15;
-      padding: 3px 6px;
-      background: rgba(0,0,0,0.5);
-      border-radius: 4px;
+      box-shadow: 0 0 16px rgba(255, 0, 60, 0.45);
     }
 
-    /* Controls */
     .editor-tabs {
       display: flex;
       gap: 8px;
@@ -541,237 +537,354 @@
       margin-bottom: 12px;
       scrollbar-width: none;
     }
-    .editor-tabs::-webkit-scrollbar { display: none; }
-    .editor-tab-btn {
-      padding: 8px 14px;
-      background: var(--bg-card);
+
+    .editor-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
       border: 1px solid var(--border-line);
+      background: var(--bg-card);
+      color: var(--text-muted);
       border-radius: 20px;
+      padding: 8px 14px;
       font-size: 12px;
       font-weight: 700;
-      color: var(--text-muted);
       cursor: pointer;
       white-space: nowrap;
     }
-    .editor-tab-btn.active {
-      background: linear-gradient(135deg, var(--red-primary), #8a001e);
-      color: #fff;
+
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--red-primary), #8f001f);
       border-color: transparent;
-      box-shadow: 0 4px 15px rgba(255, 0, 60, 0.35);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(255, 0, 60, 0.32);
     }
 
-    .editor-panel {
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 0, 60, 0.18);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      margin-bottom: 16px;
-    }
-    .slider-group { margin-bottom: 12px; }
-    .slider-group:last-child { margin-bottom: 0; }
-    .slider-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-    .range-input {
-      width: 100%;
-      height: 6px;
-      border-radius: 3px;
-      background: #240610;
-      outline: none;
-      -webkit-appearance: none;
-    }
-    .range-input::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: var(--red-primary);
-      box-shadow: 0 0 10px var(--red-primary);
-      cursor: pointer;
-    }
-
-    /* Export Box */
-    .export-option-group {
+    .panel {
       background: var(--bg-card);
       border: 1px solid rgba(255, 0, 60, 0.18);
       border-radius: var(--radius-md);
       padding: 14px;
       margin-bottom: 14px;
     }
-    .option-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .chips-row {
+
+    .preset-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
     }
-    .chips-row.fps-row {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .chip {
-      padding: 10px 4px;
-      background: var(--bg-card-light);
+
+    .preset {
       border: 1px solid var(--border-line);
+      background: var(--bg-card-light);
       border-radius: var(--radius-sm);
+      padding: 10px 6px;
       text-align: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: #fff;
       cursor: pointer;
-      position: relative;
-      font-size: 12px;
-      touch-action: manipulation;
     }
-    .chip.selected {
-      background: rgba(255, 0, 60, 0.15);
+
+    .preset.active {
+      background: rgba(255, 0, 60, 0.14);
       border-color: var(--red-primary);
       color: var(--red-accent);
-      font-weight: 900;
-      box-shadow: 0 0 12px rgba(255, 0, 60, 0.3);
+      box-shadow: 0 0 10px rgba(255, 0, 60, 0.18);
     }
-    .chip.locked { opacity: 0.6; }
-    .chip .chip-sub {
-      font-size: 8px;
-      display: block;
+
+    .slider-group {
+      margin-bottom: 12px;
+    }
+
+    .slider-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .slider-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 12px;
       color: var(--text-muted);
-      margin-top: 2px;
-      pointer-events: none;
     }
-    .chip .mini-lock {
-      position: absolute;
-      top: 3px;
-      right: 3px;
-      color: var(--accent-gold);
-      pointer-events: none;
+
+    .range {
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: #260810;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--red-primary);
+      box-shadow: 0 0 12px var(--red-primary);
+      cursor: pointer;
     }
 
     .btn-primary {
       width: 100%;
-      padding: 15px;
-      background: linear-gradient(135deg, var(--red-primary) 0%, #8c001f 100%);
       border: none;
       border-radius: var(--radius-md);
+      padding: 15px 16px;
       color: #fff;
+      background: linear-gradient(135deg, var(--red-primary), #8b0023);
       font-size: 15px;
+      font-weight: 900;
+      box-shadow: var(--shadow-red);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .export-box {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 0, 60, 0.18);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .option-title {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .chips.fps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .chip {
+      position: relative;
+      background: var(--bg-card-light);
+      border: 1px solid var(--border-line);
+      border-radius: var(--radius-sm);
+      padding: 10px 5px;
+      text-align: center;
+      font-size: 12px;
       font-weight: 800;
       cursor: pointer;
+    }
+
+    .chip.selected {
+      background: rgba(255, 0, 60, 0.12);
+      border-color: var(--red-primary);
+      color: var(--red-accent);
+      box-shadow: 0 0 12px rgba(255, 0, 60, 0.2);
+    }
+
+    .chip .chip-sub {
+      display: block;
+      margin-top: 2px;
+      font-size: 8px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .chip .mini-lock {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      color: var(--gold);
+      font-size: 9px;
+    }
+
+    .progress-wrap {
+      display: none;
+      margin-bottom: 14px;
+    }
+
+    .progress-head {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      box-shadow: var(--shadow-red);
-      touch-action: manipulation;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
     }
-    .btn-primary:active { transform: scale(0.98); }
-    .btn-secondary {
+
+    .progress-bar {
       width: 100%;
-      padding: 13px;
-      background: transparent;
-      border: 1px solid var(--border-line);
-      border-radius: var(--radius-md);
-      color: var(--text-main);
+      height: 8px;
+      background: #20050b;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--red-primary), #ff4d67);
+      transition: width 0.16s ease;
+    }
+
+    .export-done {
+      display: none;
+      margin-top: 14px;
+    }
+
+    .done-note {
+      text-align: center;
+      color: var(--success);
+      font-weight: 900;
       font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      height: 64px;
+      background: rgba(8, 2, 4, 0.96);
+      border-top: 1px solid rgba(255, 0, 60, 0.18);
+      backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 40;
+    }
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
       touch-action: manipulation;
     }
 
-    /* Modals */
-    .modal-overlay {
+    .nav-item.active {
+      color: var(--red-primary);
+    }
+
+    .nav-item.active svg {
+      stroke: var(--red-primary);
+      filter: drop-shadow(0 0 8px rgba(255, 0, 60, 0.4));
+    }
+
+    .modal {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.88);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.86);
       backdrop-filter: blur(14px);
       display: none;
       align-items: center;
       justify-content: center;
-      z-index: 100;
       padding: 16px;
+      z-index: 100;
     }
-    .modal-overlay.open {
+
+    .modal.open {
       display: flex;
-      animation: fadeIn 0.2s ease-out;
+      animation: fadeIn 0.2s ease;
     }
+
     .modal-card {
-      width: 100%;
-      max-width: 380px;
+      width: min(380px, 100%);
       background: linear-gradient(180deg, #220410 0%, #0d0105 100%);
       border: 1px solid var(--red-border);
       border-radius: var(--radius-lg);
-      padding: 24px 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 35px var(--red-glow);
+      padding: 22px 18px 18px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 28px rgba(255, 0, 60, 0.18);
       position: relative;
     }
-    .modal-close {
+
+    .close-btn {
       position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
+      top: 12px;
+      right: 12px;
       border: none;
+      background: none;
       color: var(--text-muted);
+      font-size: 22px;
       cursor: pointer;
-      font-size: 20px;
-      padding: 4px 8px;
+      line-height: 1;
     }
-    .vip-modal-header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .vip-badge-icon {
-      width: 64px;
-      height: 64px;
+
+    .vip-mark {
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, rgba(255, 0, 60, 0.1) 70%);
-      border: 2px solid var(--accent-gold);
+      margin: 0 auto 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 12px;
-      color: var(--accent-gold);
-      box-shadow: 0 0 25px var(--accent-gold-glow);
-    }
-    .vip-modal-header h3 {
-      font-size: 19px;
-      font-weight: 900;
-      margin-bottom: 4px;
-    }
-    .vip-modal-header p {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.4;
+      background: radial-gradient(circle, rgba(255, 183, 3, 0.24), rgba(255, 0, 60, 0.12));
+      border: 2px solid rgba(255, 183, 3, 0.7);
+      color: var(--gold);
+      font-size: 26px;
     }
 
-    .input-wrapper {
+    .modal h3 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .modal p {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .input-wrap {
       position: relative;
       margin-bottom: 8px;
     }
-    .input-field {
+
+    .field {
       width: 100%;
-      padding: 14px 44px 14px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
       background: #090104;
-      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: var(--radius-sm);
+      padding: 14px 42px 14px 14px;
       color: #fff;
       font-size: 14px;
       outline: none;
     }
-    .input-field:focus {
+
+    .field:focus {
       border-color: var(--red-primary);
-      box-shadow: 0 0 14px var(--red-glow);
+      box-shadow: 0 0 14px rgba(255, 0, 60, 0.18);
     }
-    .input-toggle-eye {
+
+    .eye {
       position: absolute;
       right: 12px;
       top: 50%;
@@ -779,7 +892,17 @@
       background: none;
       border: none;
       color: var(--text-muted);
+      font-size: 16px;
       cursor: pointer;
+    }
+
+    .error {
+      display: none;
+      text-align: center;
+      color: var(--danger);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
     .shake {
@@ -787,1250 +910,1332 @@
       border-color: var(--danger) !important;
       box-shadow: 0 0 12px rgba(255, 51, 68, 0.5) !important;
     }
+
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-8px); }
       40%, 80% { transform: translateX(8px); }
     }
-    .error-msg {
-      font-size: 12px;
-      color: var(--danger);
-      margin-bottom: 14px;
-      display: none;
-      text-align: center;
-      font-weight: 700;
+
+    .auth-shell {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, rgba(255, 0, 60, 0.12), transparent 20%), linear-gradient(180deg, #090104, #030103);
+      padding: 18px;
+      z-index: 120;
     }
 
-    .lockout-box {
-      font-size: 12px;
-      color: var(--accent-gold);
-      background: rgba(255, 183, 3, 0.1);
-      border: 1px solid rgba(255, 183, 3, 0.3);
-      padding: 8px;
-      border-radius: 8px;
-      margin-bottom: 12px;
+    .auth-shell.hidden {
       display: none;
-      text-align: center;
     }
-    .modal-links {
-      text-align: center;
-      margin-top: 14px;
+
+    .auth-card {
+      width: min(360px, 100%);
+      background: linear-gradient(180deg, #1a0810, #0d0206);
+      border: 1px solid rgba(255, 0, 60, 0.28);
+      border-radius: var(--radius-lg);
+      padding: 22px 18px 18px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.62), 0 0 30px rgba(255, 0, 60, 0.18);
     }
-    .modal-link {
+
+    .auth-logo {
+      width: 68px;
+      height: 68px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, #ffb703, #ff003c);
+      color: #000;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .auth-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .auth-sub {
+      text-align: center;
+      color: var(--text-muted);
       font-size: 12px;
-      color: var(--red-accent);
-      text-decoration: none;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .auth-toggle {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 4px;
+      margin-bottom: 12px;
+    }
+
+    .auth-toggle button {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 10px 8px;
+      border-radius: 10px;
+      font-weight: 800;
       cursor: pointer;
+    }
+
+    .auth-toggle button.active {
+      background: linear-gradient(135deg, var(--red-primary), #7d0020);
+      color: #fff;
+    }
+
+    .auth-field {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0b0207;
+      color: #fff;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    .auth-field:focus {
+      border-color: var(--red-primary);
+      box-shadow: 0 0 14px rgba(255, 0, 60, 0.12);
+    }
+
+    .auth-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .auth-submit {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--red-primary), #8a0020);
+      color: #fff;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .auth-alt {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.02);
+      color: #fff;
+      border-radius: 12px;
+      padding: 12px;
+      cursor: pointer;
+      font-weight: 800;
     }
 
     #toast {
       position: fixed;
-      top: 40px;
+      top: 32px;
       left: 50%;
-      transform: translateX(-50%) translateY(-60px);
-      background: #1f040d;
+      transform: translateX(-50%) translateY(-18px);
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(18, 5, 10, 0.96);
       border: 1px solid var(--red-primary);
       color: #fff;
+      border-radius: 999px;
       padding: 10px 18px;
-      border-radius: 30px;
       font-size: 13px;
-      font-weight: 700;
-      box-shadow: 0 6px 25px rgba(255, 0, 60, 0.45);
+      font-weight: 800;
+      box-shadow: 0 8px 22px rgba(255, 0, 60, 0.28);
+      transition: 0.2s ease;
       z-index: 200;
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
       white-space: nowrap;
     }
+
     #toast.show {
-      transform: translateX(-50%) translateY(0);
       opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
-    .project-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .project-card {
-      display: flex;
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 0, 60, 0.18);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      align-items: center;
-      padding: 10px;
-      gap: 12px;
-    }
-    .project-thumb {
-      width: 70px;
-      height: 70px;
-      border-radius: 8px;
-      background: #000;
-      object-fit: cover;
-    }
-    .project-meta { flex: 1; }
-    .project-meta h4 { font-size: 14px; margin-bottom: 4px; }
-    .project-meta p { font-size: 11px; color: var(--text-muted); }
-
-    /* File input yang aman agar bisa dipicu di semua browser HP */
     .hidden-file-input {
       position: absolute;
-      top: -9999px;
       left: -9999px;
+      top: -9999px;
       opacity: 0;
       width: 1px;
       height: 1px;
       pointer-events: none;
     }
-    canvas { display: none; }
+
+    canvas {
+      display: none;
+    }
   </style>
 </head>
 <body>
-
-  <div id="app-container">
-    <!-- Status Bar -->
+  <div id="app">
     <div class="status-bar">
-      <span id="clock-display">12:30</span>
-      <div class="icons">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25l1.41 1.41 1.63-1.63C9.07 19.26 10.49 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+      <span id="clock">12:00</span>
+      <div class="status-icons">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 18.25l1.41 1.41 1.63-1.63C9.07 19.26 10.49 20 12 20c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
       </div>
     </div>
 
-    <!-- Header Top Bar -->
     <header class="top-bar">
-      <div class="brand-title">
-        <span>Yuzuki HD</span>
-        <span class="badge-vip" id="vip-header-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
-          VIP 5K
-        </span>
-      </div>
+      <div class="brand">Yuzuki HD</div>
       <div class="top-actions">
-        <button class="icon-btn vip-trigger" id="btn-vip-action" onclick="openVipModal()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
-        </button>
-        <button class="icon-btn" onclick="openSettingsScreen()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <button class="icon-btn vip-trigger" id="vipButton" type="button" onclick="openVipModal()" title="VIP">👑</button>
+        <button class="icon-btn" type="button" onclick="switchScreen('settings')" title="Pengaturan">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
         </button>
       </div>
     </header>
 
-    <!-- SCREEN 1: BERANDA -->
     <main class="screen active" id="screen-home">
-      <div class="banner-promo" onclick="openVipModal()">
+      <div class="banner" onclick="openVipModal()">
         <div class="banner-tag">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           VIP 5K Red Club
         </div>
-        <div class="banner-title" id="banner-title-text">Buka AI 5K & Bebas Watermark</div>
-        <div class="banner-desc" id="banner-desc-text">Password: <strong>Yuzuki Hd</strong> untuk membuka ekspor resolusi 5K (5120p) otomatis sesuai ukuran foto.</div>
-        <button class="banner-btn" id="banner-btn-text">Aktifkan Sekarang →</button>
+        <div class="banner-title">Buka AI 5K & Bebas Watermark</div>
+        <div class="banner-desc">Password: <strong>Yuzuki Hd</strong> untuk membuka ekspor 4K/5K, stabilizer video, dan detail piksel yang lebih tajam.</div>
+        <button class="banner-btn" type="button">Aktifkan Sekarang →</button>
       </div>
 
       <div class="quota-card">
         <div class="quota-info">
-          <strong id="quota-title">Proses Gambar Hari Ini</strong>
-          <span id="quota-subtitle">Tersisa 5 dari 5 kuota gratis</span>
+          <strong id="quotaTitle">Proses Media Hari Ini</strong>
+          <span id="quotaSub">Tersisa 5 dari 5 kuota gratis</span>
         </div>
-        <div class="quota-pill" id="quota-badge">5 / 5</div>
+        <div class="quota-pill" id="quotaBadge">5 / 5</div>
       </div>
 
       <div class="section-header">
         <div class="section-title">Pilih Media</div>
-        <div class="section-subtitle">Dari Penyimpanan Ponsel</div>
+        <div class="section-subtitle">Dari penyimpanan Anda</div>
       </div>
 
       <div class="quick-actions">
         <div class="btn-media" onclick="triggerFileInput('image/*')">
-          <div class="icon-wrapper">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <div class="icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5-11 11"></path></svg>
           </div>
           <span>Perjelas Foto</span>
-          <small>Otomatis Rasio Foto</small>
+          <small>4K / 5K otomatis</small>
         </div>
 
         <div class="btn-media" onclick="triggerFileInput('video/*')">
-          <div class="icon-wrapper" style="background: linear-gradient(135deg, #ff003c, #4a000f);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          <div class="icon-wrap" style="background: linear-gradient(135deg, #ff003c, #4a000f);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2"></rect></svg>
           </div>
           <span>Perjelas Video</span>
-          <small>60 FPS & 4K/5K</small>
+          <small>HD 4K & video asli</small>
         </div>
       </div>
 
       <div class="section-header">
         <div class="section-title">Alat AI & Penjernih Piksel</div>
-        <div class="section-subtitle">Sentuh untuk mencoba</div>
+        <div class="section-subtitle">Klik untuk mulai</div>
       </div>
 
-      <div class="tools-grid">
-        <div class="tool-card premium-tool" onclick="handleToolClick('AI 5K Master Detail', true)">
-          <div class="tool-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93"/></svg>
-          </div>
-          <div class="tool-details">
-            <div class="tool-name">AI 5K Master</div>
-            <div class="tool-tag">Ultra Crystal Detail</div>
-          </div>
-          <div class="lock-badge" data-premium-lock><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <div class="tool-grid">
+        <div class="tool-card premium" onclick="handleToolClick('AI 5K Master Detail', true)">
+          <div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93"/></svg></div>
+          <div class="tool-meta"><div class="tool-name">AI 5K Master</div><div class="tool-tag">Ultra Crystal Detail</div></div>
+          <div class="lock-badge">🔒</div>
         </div>
 
-        <div class="tool-card premium-tool" onclick="handleToolClick('Face Enhancer', true)">
-          <div class="tool-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          </div>
-          <div class="tool-details">
-            <div class="tool-name">Face Enhancer</div>
-            <div class="tool-tag">Restorasi Pori & Wajah</div>
-          </div>
-          <div class="lock-badge" data-premium-lock><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="tool-card premium" onclick="handleToolClick('Face Enhancer', true)">
+          <div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="tool-meta"><div class="tool-name">Face Enhancer</div><div class="tool-tag">Pori & Wajah</div></div>
+          <div class="lock-badge">🔒</div>
         </div>
 
-        <div class="tool-card premium-tool" onclick="handleToolClick('Video Stabilizer', true)">
-          <div class="tool-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9m18 0a9 9 0 0 0-9-9m0 18a9 9 0 0 0 9-9m-18 0a9 9 0 0 0 9 9"/></svg>
-          </div>
-          <div class="tool-details">
-            <div class="tool-name">Stabilizer</div>
-            <div class="tool-tag">Anti Goyang Sinematik</div>
-          </div>
-          <div class="lock-badge" data-premium-lock><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="tool-card premium" onclick="handleToolClick('Video Stabilizer', true)">
+          <div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9m18 0a9 9 0 0 0-9-9m0 18a9 9 0 0 0 9-9m-18 0a9 9 0 0 0 9 9"/><circle cx="12" cy="12" r="4"/></svg></div>
+          <div class="tool-meta"><div class="tool-name">Stabilizer</div><div class="tool-tag">Anti Goyang</div></div>
+          <div class="lock-badge">🔒</div>
         </div>
 
-        <div class="tool-card premium-tool" onclick="handleToolClick('Frame Interpolation', true)">
-          <div class="tool-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <div class="tool-details">
-            <div class="tool-name">60 FPS Boost</div>
-            <div class="tool-tag">Super Smooth</div>
-          </div>
-          <div class="lock-badge" data-premium-lock><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        </div>
-
-        <div class="tool-card" onclick="triggerFileInput('image/*')">
-          <div class="tool-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          </div>
-          <div class="tool-details">
-            <div class="tool-name">Koreksi Standar</div>
-            <div class="tool-tag">Gratis 720p</div>
-          </div>
-        </div>
-
-        <div class="tool-card" onclick="triggerFileInput('image/*')">
-          <div class="tool-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="tool-details">
-            <div class="tool-name">Penajaman Cepat</div>
-            <div class="tool-tag">Gratis</div>
-          </div>
+        <div class="tool-card premium" onclick="handleToolClick('Hair & Fabric', true)">
+          <div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg></div>
+          <div class="tool-meta"><div class="tool-name">Hair & Fabric</div><div class="tool-tag">Serat Kain & Rambut</div></div>
+          <div class="lock-badge">🔒</div>
         </div>
       </div>
     </main>
 
-    <!-- SCREEN 2: EDITOR (SLIDER SEBELUM / SESUDAH) -->
     <section class="screen" id="screen-editor">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-        <button class="icon-btn" onclick="switchTab('home')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      <div class="editor-header">
+        <button class="icon-btn" type="button" onclick="switchScreen('home')" aria-label="Kembali">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
-        <div style="font-weight: 800; font-size: 14px;">Editor Peningkatan 5K</div>
-        <button class="banner-btn" style="padding: 5px 12px; font-size: 11px;" onclick="goToExportScreen()">
-          Lanjut Ekspor →
-        </button>
+        <div class="editor-title" id="editorTitle">Editor 4K / 5K Fidelity</div>
+        <button class="banner-btn" type="button" style="padding:5px 12px;font-size:11px;" onclick="switchScreen('export')">Ekspor →</button>
       </div>
 
-      <div class="editor-viewport" id="viewport-box">
-        <div class="comparison-container" id="compare-stage">
-          <img id="img-before" class="comparison-img" src="" alt="Sebelum">
-          <div class="enhanced-layer" id="layer-enhanced">
-            <img id="img-after" class="comparison-img" src="" alt="Sesudah">
+      <div class="editor-viewport">
+        <div class="compare-stage" id="compareStage">
+          <img id="imgBefore" class="media-item" alt="before" />
+          <div class="enhanced-layer" id="imgLayer">
+            <img id="imgAfter" class="media-item" alt="after" />
           </div>
-          <div class="watermark-overlay" id="editor-watermark">Yuzuki HD Free</div>
-          <div class="slider-handle" id="slider-handle">
-            <div class="slider-knob">⟨ ⟩</div>
+
+          <video id="videoBefore" class="media-item" playsinline muted loop preload="auto" style="display:none;"></video>
+          <div class="enhanced-layer" id="videoLayer" style="display:none;">
+            <video id="videoAfter" class="media-item" playsinline muted loop preload="auto"></video>
           </div>
-          <div class="label-badge label-before">ASLI (BURAM)</div>
-          <div class="label-badge label-after">SESUDAH 5K HD</div>
+
+          <div class="watermark" id="watermarkLabel">Yuzuki HD</div>
+          <div class="slider-handle" id="sliderHandle"><div class="slider-knob">⟨⟩</div></div>
+          <div class="label-badge label-before">ASLI</div>
+          <div class="label-badge label-after">HD / 4K / 5K</div>
         </div>
       </div>
 
       <div class="editor-tabs">
-        <button class="editor-tab-btn active" onclick="setEditorTab('ai', this)">⚡ 5K Super Clarity</button>
-        <button class="editor-tab-btn" onclick="setEditorTab('adjust', this)">🎛️ Penajaman Manual</button>
-        <button class="editor-tab-btn" onclick="setEditorTab('filters', this)">🎨 Tone Sinematik</button>
+        <button class="tab-btn active" type="button" onclick="setTab('ai', this)">⚡ Detail AI</button>
+        <button class="tab-btn" type="button" onclick="setTab('adjust', this)">🎛️ Penajaman</button>
+        <button class="tab-btn" type="button" id="videoTabBtn" onclick="setTab('videoOpt', this)" style="display:none;">📹 Video</button>
+        <button class="tab-btn" type="button" onclick="setTab('transform', this)">✂️ Transform</button>
       </div>
 
-      <div class="editor-panel" id="panel-controls">
+      <div class="panel" id="panel-ai">
+        <div class="preset-grid">
+          <button class="preset active" type="button" onclick="applyPreset('5k_ultra', this)">👑 5K Ultra</button>
+          <button class="preset" type="button" onclick="applyPreset('face_tune', this)">👤 Wajah</button>
+          <button class="preset" type="button" onclick="applyPreset('hair_texture', this)">✨ Rambut</button>
+          <button class="preset" type="button" onclick="applyPreset('fabric', this)">🧵 Kain</button>
+          <button class="preset" type="button" onclick="applyPreset('dynamic', this)">🔆 Range</button>
+          <button class="preset" type="button" onclick="applyPreset('noise_clean', this)">🪄 Bersih</button>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-adjust" style="display:none;">
         <div class="slider-group">
-          <div class="slider-label"><span>Ketajaman Piksel (Unsharp Filter)</span><span id="val-sharpen">92%</span></div>
-          <input type="range" class="range-input" id="rng-sharpen" min="0" max="100" value="92" oninput="applyCanvasAdjustments()">
+          <div class="slider-head"><span>Detail Halus</span><span id="valSharpen">100%</span></div>
+          <input class="range" id="rngSharpen" type="range" min="0" max="150" value="100" oninput="reprocessCurrentMedia()" />
         </div>
-        <div class="slider-group" style="margin-top: 10px;">
-          <div class="slider-label"><span>Kecerahan Mikro</span><span id="val-bright">104%</span></div>
-          <input type="range" class="range-input" id="rng-bright" min="50" max="150" value="104" oninput="applyCanvasAdjustments()">
+        <div class="slider-group">
+          <div class="slider-head"><span>Kontras Tepi</span><span id="valContrast">120%</span></div>
+          <input class="range" id="rngContrast" type="range" min="80" max="180" value="120" oninput="reprocessCurrentMedia()" />
         </div>
-        <div class="slider-group" style="margin-top: 10px;">
-          <div class="slider-label"><span>Mikro-Kontras (Edge Boost)</span><span id="val-contrast">118%</span></div>
-          <input type="range" class="range-input" id="rng-contrast" min="50" max="150" value="118" oninput="applyCanvasAdjustments()">
+        <div class="slider-group">
+          <div class="slider-head"><span>Pencahayaan Mikro</span><span id="valBright">104%</span></div>
+          <input class="range" id="rngBright" type="range" min="80" max="130" value="104" oninput="reprocessCurrentMedia()" />
         </div>
-        <div class="slider-group" style="margin-top: 10px;">
-          <div class="slider-label"><span>Vibrance Warna</span><span id="val-sat">116%</span></div>
-          <input type="range" class="range-input" id="rng-sat" min="50" max="150" value="116" oninput="applyCanvasAdjustments()">
+        <div class="slider-group">
+          <div class="slider-head"><span>Preservasi Warna</span><span id="valSat">100%</span></div>
+          <input class="range" id="rngSat" type="range" min="80" max="140" value="100" oninput="reprocessCurrentMedia()" />
         </div>
       </div>
 
-      <button class="btn-primary" onclick="goToExportScreen()">
-        Simpan & Lanjut Ekspor
-      </button>
+      <div class="panel" id="panel-videoOpt" style="display:none;">
+        <button class="preset" id="stabilizerBtn" type="button" style="width:100%;" onclick="toggleStabilizer()">📹 Video Stabilizer: OFF</button>
+      </div>
+
+      <div class="panel" id="panel-transform" style="display:none;">
+        <div class="preset-grid">
+          <button class="preset" type="button" onclick="rotateMedia(90)">↻ Putar 90°</button>
+          <button class="preset" type="button" onclick="flipMedia()">⇄ Balik</button>
+          <button class="preset" type="button" onclick="resetTransforms()">↺ Reset</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" type="button" onclick="switchScreen('export')">Simpan & Lanjut Ekspor</button>
     </section>
 
-    <!-- SCREEN 3: EKSPOR -->
     <section class="screen" id="screen-export">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-        <button class="icon-btn" onclick="switchTab('editor')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      <div class="editor-header">
+        <button class="icon-btn" type="button" onclick="switchScreen('editor')" aria-label="Kembali">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
-        <div style="font-weight: 800; font-size: 15px;">Ekspor Resolusi</div>
-        <div style="width: 38px;"></div>
+        <div class="editor-title">Ekspor Kualitas Tinggi</div>
+        <div style="width:38px"></div>
       </div>
 
-      <div class="export-option-group">
-        <div class="option-title">Resolusi Output (Tersedia hingga 5K)</div>
-        <div class="chips-row">
-          <div class="chip selected" id="chip-res-720" onclick="selectResolution('720p')">
-            720p
-            <span class="chip-sub">HD Gratis</span>
-          </div>
-          <div class="chip" id="chip-res-1080" onclick="selectResolution('1080p')">
-            1080p
-            <span class="chip-sub">FHD Pro</span>
-            <div class="mini-lock" data-premium-lock><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          </div>
-          <div class="chip locked" id="chip-res-4k" onclick="selectResolution('4K')">
-            4K
-            <span class="chip-sub">Ultra HD</span>
-            <div class="mini-lock" data-premium-lock><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          </div>
-          <div class="chip locked" id="chip-res-5k" onclick="selectResolution('5K')">
-            5K Ultra
-            <span class="chip-sub">5120p Max</span>
-            <div class="mini-lock" data-premium-lock><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          </div>
+      <div class="export-box">
+        <div class="option-title">Resolusi Output</div>
+        <div class="chips">
+          <div class="chip selected" id="res720" onclick="selectResolution('720p')">720p<span class="chip-sub">HD</span></div>
+          <div class="chip" id="res1080" onclick="selectResolution('1080p')">1080p<span class="chip-sub">FHD</span><span class="mini-lock">🔒</span></div>
+          <div class="chip" id="res4k" onclick="selectResolution('4K')">4K<span class="chip-sub">Ultra HD</span><span class="mini-lock">🔒</span></div>
+          <div class="chip" id="res5k" onclick="selectResolution('5K')">5K<span class="chip-sub">Ultra+</span><span class="mini-lock">🔒</span></div>
         </div>
       </div>
 
-      <div class="export-option-group">
-        <div class="option-title">Kecepatan Frame (FPS)</div>
-        <div class="chips-row fps-row">
-          <div class="chip selected" onclick="selectChip(this)">24 FPS<span class="chip-sub">Sinematik</span></div>
+      <div class="export-box">
+        <div class="option-title">Frame Rate</div>
+        <div class="chips fps">
+          <div class="chip selected" onclick="selectChip(this)">24 FPS<span class="chip-sub">Cinematic</span></div>
           <div class="chip" onclick="selectChip(this)">30 FPS<span class="chip-sub">Standar</span></div>
-          <div class="chip" id="chip-fps-60" onclick="selectFps(this, '60 FPS')">
-            60 FPS
-            <span class="chip-sub">Sangat Halus</span>
-            <div class="mini-lock" data-premium-lock><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          </div>
+          <div class="chip" id="fps60" onclick="selectFps('60 FPS', this)">60 FPS<span class="chip-sub">Halus</span><span class="mini-lock">🔒</span></div>
         </div>
       </div>
 
-      <div class="export-option-group">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span style="font-size: 13px;">Watermark Yuzuki HD</span>
-          <span id="wm-status-text" style="font-size: 12px; color: var(--accent-gold); font-weight: 800;">Hanya VIP Bebas WM</span>
+      <div class="export-box">
+        <div class="option-title">Detail Output</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;">
+          <span>Format</span>
+          <strong id="formatInfo" style="color:var(--red-accent);">Foto PNG</strong>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span style="font-size: 13px;">Dimensi Output Otomatis</span>
-          <span id="output-dim-info" style="font-size: 13px; font-weight: 800; color: var(--success);">Menyesuaikan...</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;">
+          <span>Dimensi</span>
+          <strong id="dimInfo" style="color:var(--success);">Menghitung...</strong>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 13px;">Estimasi Ukuran File</span>
-          <span id="est-filesize" style="font-size: 13px; font-weight: 800; color: var(--red-accent);">~ 8.4 MB</span>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;">
+          <span>Stabilizer</span>
+          <strong id="eisInfo" style="color:var(--text-muted);">Nonaktif</strong>
         </div>
-      </div>
-
-      <div id="export-progress-box" style="display: none; margin-bottom: 14px;">
-        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px;">
-          <span id="export-step-text">Memproses AI Super Resolution 5K...</span>
-          <span id="export-percentage">0%</span>
-        </div>
-        <div style="width: 100%; height: 8px; background: #20040e; border-radius: 4px; overflow: hidden;">
-          <div id="export-bar-fill" style="width: 0%; height: 100%; background: linear-gradient(90deg, #ff003c, #ff3344); transition: width 0.15s ease;"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;">
+          <span>Estimasi</span>
+          <strong id="sizeInfo" style="color:var(--red-accent);">~ 12 MB</strong>
         </div>
       </div>
 
-      <button class="btn-primary" id="btn-start-export" onclick="startExportProcess()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Mulai Ekspor Sekarang
-      </button>
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-head">
+          <span id="progressText">Memproses AI...</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
 
-      <div id="export-done-actions" style="display: none; margin-top: 16px;">
-        <div style="text-align: center; color: var(--success); font-weight: 800; font-size: 14px; margin-bottom: 12px;">
-          ✓ Berhasil diekspor sesuai ukuran asli gambar!
-        </div>
-        <button class="btn-primary" style="background: linear-gradient(135deg, #00e676, #00a854);" onclick="saveToGallery()">
-          Simpan ke Galeri HP
-        </button>
+      <button class="btn-primary" type="button" id="exportStartBtn" onclick="startExportProcess()">Mulai Ekspor</button>
 
-        <div style="margin-top: 14px; text-align: center; font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
-          Bagikan Langsung:
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
-          <button class="chip" onclick="shareSocial('TikTok')">TikTok</button>
-          <button class="chip" onclick="shareSocial('Instagram Reels')">Reels</button>
-          <button class="chip" onclick="shareSocial('WhatsApp')">WhatsApp</button>
-          <button class="chip" onclick="shareSocial('Salin Link')">Salin</button>
-        </div>
+      <div class="export-done" id="exportDone">
+        <div class="done-note">✓ Ekspor selesai dan file siap disimpan</div>
+        <button class="btn-primary" type="button" onclick="saveFile()">Simpan ke Galeri / Unduhan</button>
+        <button class="btn-primary" type="button" onclick="openResultDirect()" style="margin-top:10px; background:linear-gradient(135deg, #00d98b, #0f8a5d);">Buka File Langsung</button>
       </div>
     </section>
 
-    <!-- SCREEN 4: TEMPLATE -->
-    <section class="screen" id="screen-template">
-      <div class="section-header">
-        <div class="section-title">Template Tren Sosial Media</div>
-      </div>
-      <div class="project-grid">
-        <div class="project-card" onclick="applyTemplate('TikTok 5K Crystal')">
-          <div style="width: 60px; height: 60px; border-radius: 8px; background: linear-gradient(135deg, #ff003c, #000); display:flex; align-items:center; justify-content:center; font-weight:900;">TT</div>
-          <div class="project-meta">
-            <h4>TikTok 5K Ultra Crystal</h4>
-            <p>Otomatis Rasio Layar • Sharp Pop • 60 FPS</p>
-          </div>
-        </div>
-        <div class="project-card" onclick="applyTemplate('Reels Crimson Deep')">
-          <div style="width: 60px; height: 60px; border-radius: 8px; background: linear-gradient(135deg, #ff003c, #500012); display:flex; align-items:center; justify-content:center; font-weight:900;">IG</div>
-          <div class="project-meta">
-            <h4>Reels Obsidian Tone</h4>
-            <p>Deep Red Black • High Clarity Sinematik</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SCREEN 5: RIWAYAT -->
-    <section class="screen" id="screen-project">
-      <div class="section-header">
-        <div class="section-title">Riwayat Hasil Edit</div>
-      </div>
-      <div class="project-grid" id="project-history-list"></div>
-    </section>
-
-    <!-- SCREEN 6: PENGATURAN -->
     <section class="screen" id="screen-settings">
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-        <button class="icon-btn" onclick="switchTab('home')">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      <div class="editor-header">
+        <button class="icon-btn" type="button" onclick="switchScreen('home')" aria-label="Kembali">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
-        <div style="font-weight: 800; font-size: 15px;">Pengaturan Akun</div>
-        <div style="width: 38px;"></div>
+        <div class="editor-title">Pengaturan Akun</div>
+        <div style="width:38px;"></div>
       </div>
 
-      <div class="quota-card" style="margin-bottom: 16px;">
+      <div class="quota-card" style="margin-bottom:16px;">
         <div class="quota-info">
-          <strong id="settings-vip-status">Status Akun: Mode Gratis</strong>
-          <span id="settings-vip-detail">Maksimal 720p, watermark aktif</span>
+          <strong id="accountStatus">Status Akun: Gratis</strong>
+          <span id="accountDetail">Batas 5 proses gratis per hari</span>
         </div>
       </div>
 
-      <div id="settings-vip-actions"></div>
-
-      <div class="export-option-group" style="margin-top: 14px;">
-        <div class="option-title">Informasi Sistem</div>
-        <div style="font-size: 12px; color: var(--text-muted); line-height: 1.8;">
-          <div>Versi: 3.2.0 (Auto-Ratio 5K Engine)</div>
-          <div>Mode Ukuran: Rasio Gambar Asli Otomatis</div>
-          <div style="margin-top: 8px; cursor: pointer; color: var(--red-accent);" onclick="clearCache()">Bersihkan Cache Riwayat</div>
-        </div>
-      </div>
+      <div id="settingsActions"></div>
     </section>
 
-    <!-- BOTTOM NAVIGATION -->
     <nav class="bottom-nav">
-      <div class="nav-item active" id="nav-home" onclick="switchTab('home')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div class="nav-item active" id="nav-home" onclick="switchScreen('home')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M9 22V12h6v10"></path></svg>
         <span>Home</span>
       </div>
-      <div class="nav-item" id="nav-template" onclick="switchTab('template')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span>Template</span>
+      <div class="nav-item" id="nav-editor" onclick="switchScreen('editor')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><path d="M2 12l10 5 10-5"></path><path d="M2 17l10 5 10-5"></path></svg>
+        <span>Editor</span>
       </div>
-      <div class="nav-item" id="nav-project" onclick="switchTab('project')">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-        <span>Project</span>
+      <div class="nav-item" id="nav-settings" onclick="switchScreen('settings')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>Pengaturan</span>
       </div>
     </nav>
 
-    <!-- MODAL VIP -->
-    <div class="modal-overlay" id="modal-vip">
+    <div class="modal" id="vipModal">
       <div class="modal-card">
-        <button class="modal-close" onclick="closeVipModal()">✕</button>
-        <div class="vip-modal-header">
-          <div class="vip-badge-icon">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
-          </div>
-          <h3>Aktifkan VIP 5K</h3>
-          <p>Masukkan kata sandi langganan untuk membuka semua fitur AI 5K Ultra HD.</p>
-        </div>
+        <button class="close-btn" type="button" onclick="closeVipModal()">✕</button>
+        <div class="vip-mark">👑</div>
+        <h3>Aktivasi VIP 5K</h3>
+        <p>Ketik password untuk membuka 4K/5K, tanpa watermark, dan hasil video asli lebih tajam.</p>
 
-        <div class="lockout-box" id="lockout-timer">
-          Terlalu banyak percobaan! Coba lagi dalam <span id="lockout-seconds">30</span> detik.
+        <div class="input-wrap">
+          <input id="vipPassword" class="field" type="password" placeholder="Ketik: Yuzuki Hd" />
+          <button class="eye" type="button" onclick="toggleVipPassword()">👁</button>
         </div>
-
-        <div class="input-wrapper">
-          <input type="password" id="vip-password-input" class="input-field" placeholder="Ketik: Yuzuki Hd" autocomplete="off">
-          <button type="button" class="input-toggle-eye" onclick="togglePasswordVisibility()">
-            <svg id="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          </button>
-        </div>
-        <div class="error-msg" id="vip-error-msg">Password salah. Silakan periksa kembali.</div>
-
-        <button class="btn-primary" id="btn-submit-vip" onclick="handleActivateSubmit()">
-          Aktifkan VIP 5K
-        </button>
-
-        <div class="modal-links">
-          <a class="modal-link" onclick="showToast('Password VIP: Yuzuki Hd')">Lupa kata sandi? Ketuk di sini</a>
-        </div>
+        <div class="error" id="vipError">Password salah. Coba: Yuzuki Hd</div>
+        <button class="btn-primary" type="button" onclick="activateVip()">Aktifkan VIP 5K</button>
       </div>
     </div>
 
-    <!-- MODAL SUKSES -->
-    <div class="modal-overlay" id="modal-success">
-      <div class="modal-card" style="text-align: center;">
-        <div style="font-size: 50px; margin-bottom: 8px;">👑</div>
-        <h3 style="font-size: 20px; color: var(--accent-gold); margin-top: 4px;">Akses 5K VIP Aktif!</h3>
-        <p style="font-size: 13px; color: var(--text-muted); margin: 8px 0 20px;">
-          Semua fitur AI 5K Ultra HD, 60 FPS, dan ekspor tanpa watermark telah terbuka tanpa batas kuota!
-        </p>
-        <button class="btn-primary" onclick="closeSuccessModal()">Mulai Pakai Fitur 5K</button>
-      </div>
-    </div>
-
-    <!-- TOAST -->
-    <div id="toast">
-      <span id="toast-text">Pemberitahuan</span>
-    </div>
-
-    <!-- File Picker -->
-    <input type="file" id="global-file-picker" class="hidden-file-input" accept="image/*,video/*" onchange="handleFileSelected(event)">
-    <canvas id="hidden-canvas"></canvas>
+    <div id="toast">Informasi</div>
   </div>
 
+  <div class="auth-shell" id="authShell">
+    <div class="auth-card">
+      <div class="auth-logo">Y</div>
+      <div class="auth-title">Yuzuki HD</div>
+      <div class="auth-sub">Silakan daftar atau masuk untuk mulai proses HD / 4K / 5K.</div>
+
+      <div class="auth-toggle">
+        <button class="active" id="tabRegister" type="button">Daftar</button>
+        <button id="tabLogin" type="button">Masuk</button>
+      </div>
+
+      <input id="authName" class="auth-field" type="text" placeholder="Nama lengkap" style="display:block;" />
+      <input id="authEmail" class="auth-field" type="email" placeholder="Email" />
+      <input id="authPassword" class="auth-field" type="password" placeholder="Kata sandi" />
+
+      <div class="auth-actions">
+        <button class="auth-submit" id="submitAuth" type="button">Buat Akun</button>
+        <button class="auth-alt" id="switchAuthMode" type="button">Sudah punya akun? Masuk</button>
+      </div>
+    </div>
+  </div>
+
+  <input id="filePicker" class="hidden-file-input" type="file" />
+  <canvas id="hiddenCanvas"></canvas>
+  <canvas id="previewCanvas"></canvas>
+
   <script>
-    /* =====================================================================
-       1. IMPLEMENTASI SHA-256 MURNI JS (ANTI-MACET DI HP / OFFLINE)
-       ===================================================================== */
-    function sha256Pure(ascii) {
-      function rightRotate(value, amount) {
-        return (value >>> amount) | (value << (32 - amount));
-      }
-      var mathPow = Math.pow;
-      var maxWord = mathPow(2, 32);
-      var lengthProperty = 'length';
-      var i, j;
-      var result = '';
-      var words = [];
-      var asciiBitLength = ascii[lengthProperty] * 8;
-      var hash = [
-        0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
-        0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
-      ];
-      var k = [
-        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
-        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
-        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
-        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
-        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
-        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
-        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
-        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
-      ];
-      var isComposite = {};
-      ascii += '\x80';
-      while (ascii[lengthProperty] % 64 - 56) ascii += '\x00';
-      for (i = 0; i < ascii[lengthProperty]; i++) {
-        j = ascii.charCodeAt(i);
-        words[i >> 2] |= j << ((3 - i) % 4) * 8;
-      }
-      words[words[lengthProperty]] = ((asciiBitLength / maxWord) | 0);
-      words[words[lengthProperty]] = (asciiBitLength);
+    const STORAGE_KEY = "yuzuki_hd_users";
+    const ACTIVE_USER_KEY = "yuzuki_hd_active_user";
+    const PREMIUM_KEY = "yuzuki_hd_premium";
+    const DAILY_KEY = "yuzuki_hd_daily_usage";
+    const DAILY_DATE_KEY = "yuzuki_hd_daily_date";
 
-      for (j = 0; j < words[lengthProperty];) {
-        var w = words.slice(j, j += 16);
-        var oldHash = hash;
-        hash = hash.slice(0, 8);
+    let authMode = "register";
+    let currentScreen = "home";
+    let isVideoMode = false;
+    let selectedResolution = "720p";
+    let wasPremium = false;
+    let currentObjectUrl = null;
+    let exportUrl = null;
+    let currentBaseImage = null;
+    let currentVideoElement = null;
+    let mediaRotation = 0;
+    let mediaFlip = false;
+    let isStabilizerOn = false;
+    let activeUser = null;
 
-        for (i = 0; i < 64; i++) {
-          var w15 = w[i - 15], w2 = w[i - 2];
-          var s0 = rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3);
-          var s1 = rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10);
-          w[i] = (i < 16) ? w[i] : (w[i - 16] + s0 + w[i - 7] + s1) | 0;
+    const toast = document.getElementById("toast");
+    const authShell = document.getElementById("authShell");
+    const vipModal = document.getElementById("vipModal");
+    const vipPassword = document.getElementById("vipPassword");
+    const vipError = document.getElementById("vipError");
 
-          var s1_maj = rightRotate(hash[0], 2) ^ rightRotate(hash[0], 13) ^ rightRotate(hash[0], 22);
-          var maj = (hash[0] & hash[1]) ^ (hash[0] & hash[2]) ^ (hash[1] & hash[2]);
-          var t2 = (s1_maj + maj) | 0;
-          var s1_ch = rightRotate(hash[4], 6) ^ rightRotate(hash[4], 11) ^ rightRotate(hash[4], 25);
-          var ch = (hash[4] & hash[5]) ^ ((~hash[4]) & hash[6]);
-          var t1 = (hash[7] + s1_ch + ch + k[i] + w[i]) | 0;
+    const elements = {
+      quotaTitle: document.getElementById("quotaTitle"),
+      quotaSub: document.getElementById("quotaSub"),
+      quotaBadge: document.getElementById("quotaBadge"),
+      accountStatus: document.getElementById("accountStatus"),
+      accountDetail: document.getElementById("accountDetail"),
+      settingsActions: document.getElementById("settingsActions"),
+      imgBefore: document.getElementById("imgBefore"),
+      imgAfter: document.getElementById("imgAfter"),
+      videoBefore: document.getElementById("videoBefore"),
+      videoAfter: document.getElementById("videoAfter"),
+      imgLayer: document.getElementById("imgLayer"),
+      videoLayer: document.getElementById("videoLayer"),
+      editorTitle: document.getElementById("editorTitle"),
+      watermarkLabel: document.getElementById("watermarkLabel"),
+      formatInfo: document.getElementById("formatInfo"),
+      dimInfo: document.getElementById("dimInfo"),
+      sizeInfo: document.getElementById("sizeInfo"),
+      eisInfo: document.getElementById("eisInfo"),
+      progressWrap: document.getElementById("progressWrap"),
+      progressText: document.getElementById("progressText"),
+      progressPercent: document.getElementById("progressPercent"),
+      progressFill: document.getElementById("progressFill"),
+      exportDone: document.getElementById("exportDone"),
+      exportStartBtn: document.getElementById("exportStartBtn"),
+      compareStage: document.getElementById("compareStage"),
+      sliderHandle: document.getElementById("sliderHandle"),
+      vipButton: document.getElementById("vipButton"),
+      stabilizerBtn: document.getElementById("stabilizerBtn")
+    };
 
-          hash = [(t1 + t2) | 0].concat(hash);
-          hash[4] = (hash[4] + t1) | 0;
-        }
-
-        for (i = 0; i < 8; i++) {
-          hash[i] = (hash[i] + oldHash[i]) | 0;
-        }
-      }
-
-      for (i = 0; i < 8; i++) {
-        for (j = 3; j >= 0; j--) {
-          var b = (hash[i] >> (8 * j)) & 255;
-          result += ((b < 16) ? 0 : '') + b.toString(16);
-        }
-      }
-      return result;
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2200);
     }
 
-    // Hash SHA-256 target dari "yuzuki hd"
-    const TARGET_VIP_HASH = sha256Pure("yuzuki hd");
-    let failedAttempts = 0;
-    let lockoutRemaining = 0;
-    let lockoutInterval = null;
-
-    function isPremium() {
-      return localStorage.getItem("yuzuki_is_premium") === "true";
+    function sha256Text(value) {
+      if (window.crypto && crypto.subtle) {
+        return crypto.subtle.digest("SHA-256", new TextEncoder().encode(value)).then(buf => {
+          let out = "";
+          new Uint8Array(buf).forEach(v => out += v.toString(16).padStart(2, "0"));
+          return out;
+        });
+      }
+      let hash = 2166136261;
+      for (let i = 0; i < value.length; i++) {
+        hash ^= value.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Promise.resolve((hash >>> 0).toString(16));
     }
 
-    function activatePremium(password) {
-      if (!password) return false;
-      const clean = password.trim().toLowerCase();
-      if (sha256Pure(clean) === TARGET_VIP_HASH) {
-        localStorage.setItem("yuzuki_is_premium", "true");
-        failedAttempts = 0;
-        return true;
-      }
-      return false;
+    function toggleVipPassword() {
+      vipPassword.type = vipPassword.type === "password" ? "text" : "password";
     }
 
-    function deactivatePremium() {
-      localStorage.removeItem("yuzuki_is_premium");
-      updatePremiumUIState();
-      showToast("Berhasil keluar dari mode Premium.");
-    }
-
-    /* =====================================================================
-       2. KUOTA HARIAN
-       ===================================================================== */
-    const DAILY_LIMIT = 5;
-
-    function getTodayString() {
-      return new Date().toISOString().slice(0, 10);
-    }
-
-    function getDailyUsage() {
-      const savedDate = localStorage.getItem("yuzuki_usage_date");
-      const today = getTodayString();
-      if (savedDate !== today) {
-        localStorage.setItem("yuzuki_usage_date", today);
-        localStorage.setItem("yuzuki_usage_count", "0");
-        return 0;
-      }
-      return parseInt(localStorage.getItem("yuzuki_usage_count") || "0", 10);
-    }
-
-    function incrementDailyUsage() {
-      if (isPremium()) return;
-      const current = getDailyUsage();
-      localStorage.setItem("yuzuki_usage_count", (current + 1).toString());
-      updateQuotaUI();
-    }
-
-    function updateQuotaUI() {
-      const quotaTitle = document.getElementById("quota-title");
-      const quotaSubtitle = document.getElementById("quota-subtitle");
-      const quotaBadge = document.getElementById("quota-badge");
-
-      if (isPremium()) {
-        quotaTitle.textContent = "Akses Yuzuki 5K VIP Aktif";
-        quotaSubtitle.textContent = "Bebas proses tanpa batas kuota harian";
-        quotaBadge.textContent = "Unlimited ♾️";
-        quotaBadge.className = "quota-pill unlimited";
-      } else {
-        const usage = getDailyUsage();
-        const remaining = Math.max(0, DAILY_LIMIT - usage);
-        quotaTitle.textContent = "Proses Gambar Hari Ini";
-        quotaSubtitle.textContent = `Tersisa ${remaining} dari ${DAILY_LIMIT} kuota gratis`;
-        quotaBadge.textContent = `${remaining} / ${DAILY_LIMIT}`;
-        quotaBadge.className = "quota-pill";
-      }
-    }
-
-    /* =====================================================================
-       3. SINKRONISASI TAMPILAN
-       ===================================================================== */
-    function updatePremiumUIState() {
-      const vipActive = isPremium();
-
-      const headerBadge = document.getElementById("vip-header-badge");
-      const vipBtn = document.getElementById("btn-vip-action");
-      headerBadge.style.display = vipActive ? "inline-flex" : "none";
-      if (vipActive) {
-        vipBtn.classList.remove("vip-trigger");
-        vipBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="#ffb703"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`;
-      } else {
-        vipBtn.classList.add("vip-trigger");
-        vipBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`;
-      }
-
-      const bTitle = document.getElementById("banner-title-text");
-      const bDesc = document.getElementById("banner-desc-text");
-      const bBtn = document.getElementById("banner-btn-text");
-      if (vipActive) {
-        bTitle.textContent = "Status 5K VIP Aktif";
-        bDesc.textContent = "Resolusi 5K Ultra (5120p), 4K, 60 FPS, dan AI Restorasi aktif tanpa batas.";
-        bBtn.textContent = "Nikmati Layanan VIP ✓";
-      } else {
-        bTitle.textContent = "Buka AI 5K & Bebas Watermark";
-        bDesc.textContent = "Password: Yuzuki Hd untuk membuka ekspor resolusi 5K otomatis sesuai rasio foto.";
-        bBtn.textContent = "Aktifkan Sekarang →";
-      }
-
-      document.querySelectorAll("[data-premium-lock]").forEach(badge => {
-        badge.style.display = vipActive ? "none" : "flex";
-      });
-
-      const editorWm = document.getElementById("editor-watermark");
-      const wmStatusText = document.getElementById("wm-status-text");
-      if (vipActive) {
-        editorWm.style.display = "none";
-        wmStatusText.textContent = "Bebas Watermark (VIP)";
-        wmStatusText.style.color = "var(--success)";
-      } else {
-        editorWm.style.display = "block";
-        wmStatusText.textContent = "Watermark Aktif (Gratis)";
-        wmStatusText.style.color = "var(--accent-gold)";
-      }
-
-      const chip1080 = document.getElementById("chip-res-1080");
-      const chip4k = document.getElementById("chip-res-4k");
-      const chip5k = document.getElementById("chip-res-5k");
-      if (vipActive) {
-        chip1080.classList.remove("locked");
-        chip4k.classList.remove("locked");
-        chip5k.classList.remove("locked");
-      } else {
-        chip4k.classList.add("locked");
-        chip5k.classList.add("locked");
-      }
-
-      const stTitle = document.getElementById("settings-vip-status");
-      const stDetail = document.getElementById("settings-vip-detail");
-      const stAction = document.getElementById("settings-vip-actions");
-      if (vipActive) {
-        stTitle.textContent = "Status Akun: Yuzuki 5K VIP Aktif 👑";
-        stTitle.style.color = "var(--accent-gold)";
-        stDetail.textContent = "Akses penuh tanpa batas, 5K Ultra HD (5120p) & 60 FPS";
-        stAction.innerHTML = `
-          <button class="btn-secondary" style="border-color: var(--danger); color: var(--danger);" onclick="deactivatePremium()">
-            Keluar dari Premium
-          </button>
-        `;
-      } else {
-        stTitle.textContent = "Status Akun: Mode Gratis";
-        stTitle.style.color = "var(--text-main)";
-        stDetail.textContent = "Peningkatan 720p dengan watermark kecil";
-        stAction.innerHTML = `
-          <button class="btn-primary" onclick="openVipModal()">
-            Aktifkan VIP dengan Password
-          </button>
-        `;
-      }
-
-      updateQuotaUI();
-      updateOutputDimensionPreview();
-    }
-
-    /* =====================================================================
-       4. INTERAKSI MODAL VIP
-       ===================================================================== */
     function openVipModal() {
-      if (isPremium()) {
-        showToast("Akun Anda sudah berstatus VIP 5K.");
-        return;
-      }
-      document.getElementById("modal-vip").classList.add("open");
-      document.getElementById("vip-password-input").value = "";
-      document.getElementById("vip-error-msg").style.display = "none";
-      document.getElementById("vip-password-input").classList.remove("shake");
+      vipModal.classList.add("open");
+      vipPassword.value = "";
+      vipError.style.display = "none";
+      vipPassword.classList.remove("shake");
     }
 
     function closeVipModal() {
-      document.getElementById("modal-vip").classList.remove("open");
+      vipModal.classList.remove("open");
     }
 
-    function togglePasswordVisibility() {
-      const input = document.getElementById("vip-password-input");
-      const eyeIcon = document.getElementById("eye-icon");
-      if (input.type === "password") {
-        input.type = "text";
-        eyeIcon.innerHTML = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
+    function getStoredUsers() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+      catch { return []; }
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+    }
+
+    function isPremium() {
+      return localStorage.getItem(PREMIUM_KEY) === "true";
+    }
+
+    function setPremium(value) {
+      localStorage.setItem(PREMIUM_KEY, String(value));
+      updateAccountState();
+    }
+
+    function getDailyUsage() {
+      const today = new Date().toISOString().slice(0, 10);
+      const savedDate = localStorage.getItem(DAILY_DATE_KEY);
+      const v = Number(localStorage.getItem(DAILY_KEY) || "0");
+
+      if (savedDate !== today) {
+        localStorage.setItem(DAILY_DATE_KEY, today);
+        localStorage.setItem(DAILY_KEY, "0");
+        return 0;
+      }
+
+      return v;
+    }
+
+    function incrementUsage() {
+      if (isPremium()) return;
+      const today = new Date().toISOString().slice(0, 10);
+      if (localStorage.getItem(DAILY_DATE_KEY) !== today) {
+        localStorage.setItem(DAILY_DATE_KEY, today);
+        localStorage.setItem(DAILY_KEY, "1");
       } else {
-        input.type = "password";
-        eyeIcon.innerHTML = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+        localStorage.setItem(DAILY_KEY, String(Number(localStorage.getItem(DAILY_KEY) || "0") + 1));
+      }
+      updateAccountState();
+    }
+
+    function updateAccountState() {
+      const premium = isPremium();
+      const remaining = Math.max(0, 5 - getDailyUsage());
+
+      elements.quotaBadge.textContent = premium ? "Unlimited ♾️" : `${remaining} / 5`;
+      elements.quotaBadge.className = premium ? "quota-pill unlimited" : "quota-pill";
+      elements.quotaTitle.textContent = premium ? "Yuzuki VIP 5K Aktif" : "Proses Media Hari Ini";
+      elements.quotaSub.textContent = premium ? "Bebas ekspor tanpa batas harian" : `Tersisa ${remaining} dari 5 kuota gratis`;
+
+      elements.accountStatus.textContent = premium ? "Status Akun: Yuzuki VIP 5K Aktif 👑" : "Status Akun: Mode Gratis";
+      elements.accountDetail.textContent = premium ? "Semua resolusi terbuka tanpa watermark" : "Batas 5 proses gratis per hari";
+
+      document.getElementById("vipButton").textContent = premium ? "✅" : "👑";
+      document.getElementById("vipButton").title = premium ? "VIP aktif" : "Aktivasi VIP";
+
+      const lockBadges = document.querySelectorAll(".lock-badge, .mini-lock");
+      lockBadges.forEach(el => {
+        el.style.display = premium ? "none" : "flex";
+      });
+
+      const settingsActions = document.getElementById("settingsActions");
+      if (premium) {
+        settingsActions.innerHTML = `
+          <div class="quota-card" style="margin-bottom:16px;">
+            <div class="quota-info">
+              <strong>Lisensi Premium Sudah Aktif</strong>
+              <span>4K/5K, stabilizer, tanpa watermark</span>
+            </div>
+          </div>
+          <button class="btn-primary" type="button" onclick="setPremium(false); showToast('VIP dinonaktifkan');">Nonaktifkan VIP</button>
+        `;
+      } else {
+        settingsActions.innerHTML = `
+          <button class="btn-primary" type="button" onclick="openVipModal()">Aktifkan VIP dengan Password</button>
+        `;
       }
     }
 
-    function handleActivateSubmit() {
-      if (lockoutRemaining > 0) return;
-
-      const input = document.getElementById("vip-password-input");
-      const errorMsg = document.getElementById("vip-error-msg");
-      const enteredPass = input.value;
-
-      const success = activatePremium(enteredPass);
-
-      if (success) {
-        closeVipModal();
-        updatePremiumUIState();
-        document.getElementById("modal-success").classList.add("open");
-      } else {
-        failedAttempts++;
-        input.classList.remove("shake");
-        void input.offsetWidth;
-        input.classList.add("shake");
-        errorMsg.style.display = "block";
-        errorMsg.textContent = `Password salah (${failedAttempts}/5). Coba ketik: Yuzuki Hd`;
-
-        if (failedAttempts >= 5) {
-          triggerLockout(30);
-        }
-      }
+    function setTab(name, btn) {
+      document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("panel-ai").style.display = name === "ai" ? "block" : "none";
+      document.getElementById("panel-adjust").style.display = name === "adjust" ? "block" : "none";
+      document.getElementById("panel-videoOpt").style.display = name === "videoOpt" ? "block" : "none";
+      document.getElementById("panel-transform").style.display = name === "transform" ? "block" : "none";
     }
 
-    function triggerLockout(seconds) {
-      lockoutRemaining = seconds;
-      const lockoutBox = document.getElementById("lockout-timer");
-      const lockoutSpan = document.getElementById("lockout-seconds");
-      const input = document.getElementById("vip-password-input");
-      const btnSubmit = document.getElementById("btn-submit-vip");
-      const errorMsg = document.getElementById("vip-error-msg");
+    function switchScreen(name) {
+      currentScreen = name;
+      document.querySelectorAll(".screen").forEach(screen => screen.classList.remove("active"));
+      const target = document.getElementById("screen-" + name);
+      if (target) target.classList.add("active");
 
-      lockoutBox.style.display = "block";
-      errorMsg.style.display = "none";
-      input.disabled = true;
-      btnSubmit.disabled = true;
-      btnSubmit.style.opacity = "0.5";
-
-      lockoutInterval = setInterval(() => {
-        lockoutRemaining--;
-        lockoutSpan.textContent = lockoutRemaining;
-        if (lockoutRemaining <= 0) {
-          clearInterval(lockoutInterval);
-          failedAttempts = 0;
-          lockoutBox.style.display = "none";
-          input.disabled = false;
-          btnSubmit.disabled = false;
-          btnSubmit.style.opacity = "1";
-          input.value = "";
-        }
-      }, 1000);
+      document.querySelectorAll(".nav-item").forEach(item => {
+        item.classList.toggle("active", item.id === "nav-" + name);
+      });
     }
 
-    function closeSuccessModal() {
-      document.getElementById("modal-success").classList.remove("open");
-    }
-
-    /* =====================================================================
-       5. SISTEM PEMROSESAN GAMBAR DENGAN UKURAN ASLI OTOMATIS
-       ===================================================================== */
-    let currentImageElement = new Image();
-    let currentMediaUrl = null;
-    let selectedResolution = "720p";
-    let originalWidth = 1280;
-    let originalHeight = 720;
-
-    function triggerFileInput(acceptType) {
-      if (!isPremium() && getDailyUsage() >= DAILY_LIMIT) {
-        showToast("Batas 5 proses harian gratis telah habis! Upgrade ke VIP 5K.");
+    function handleToolClick(name, isVip) {
+      if (isVip && !isPremium()) {
+        showToast(name + " membutuhkan VIP.");
         openVipModal();
         return;
       }
-      const picker = document.getElementById("global-file-picker");
-      picker.accept = acceptType;
-      picker.value = ""; // reset agar file yang sama bisa dipilih ulang
+      triggerFileInput(name.includes("Video") ? "video/*" : "image/*");
+    }
+
+    function triggerFileInput(type) {
+      if (!activeUser) {
+        authShell.classList.remove("hidden");
+        return;
+      }
+
+      if (!isPremium() && getDailyUsage() >= 5) {
+        openVipModal();
+        showToast("Batas gratis hari ini sudah habis.");
+        return;
+      }
+
+      const picker = document.getElementById("filePicker");
+      picker.accept = type;
+      picker.value = "";
       picker.click();
     }
 
-    function handleFileSelected(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        currentMediaUrl = e.target.result;
-        setupEditorMedia(currentMediaUrl);
-        switchTab("editor");
-        showToast("Foto berhasil dimuat!");
-      };
-      reader.readAsDataURL(file);
+    function updateAuthView() {
+      const register = authMode === "register";
+      document.getElementById("authName").style.display = register ? "block" : "none";
+      document.getElementById("submitAuth").textContent = register ? "Buat Akun" : "Masuk";
+      document.getElementById("switchAuthMode").textContent = register ? "Sudah punya akun? Masuk" : "Belum punya akun? Daftar";
+      document.getElementById("tabRegister").classList.toggle("active", register);
+      document.getElementById("tabLogin").classList.toggle("active", !register);
     }
 
-    function setupEditorMedia(src) {
-      const imgBefore = document.getElementById("img-before");
-      const imgAfter = document.getElementById("img-after");
+    document.getElementById("tabRegister").addEventListener("click", () => {
+      authMode = "register";
+      updateAuthView();
+    });
 
-      imgBefore.src = src;
-      imgAfter.src = src;
-      imgBefore.style.filter = "blur(1px) contrast(95%)";
+    document.getElementById("tabLogin").addEventListener("click", () => {
+      authMode = "login";
+      updateAuthView();
+    });
 
-      currentImageElement.onload = () => {
-        // Ambil dimensi asli foto
-        originalWidth = currentImageElement.naturalWidth || currentImageElement.width || 1280;
-        originalHeight = currentImageElement.naturalHeight || currentImageElement.height || 720;
-        applyCanvasAdjustments();
-        updateOutputDimensionPreview();
-      };
-      currentImageElement.src = src;
-    }
+    document.getElementById("switchAuthMode").addEventListener("click", () => {
+      authMode = authMode === "register" ? "login" : "register";
+      updateAuthView();
+    });
 
-    function applyCanvasAdjustments() {
-      const sharpen = document.getElementById("rng-sharpen").value;
-      const bright = document.getElementById("rng-bright").value;
-      const contrast = document.getElementById("rng-contrast").value;
-      const sat = document.getElementById("rng-sat").value;
+    document.getElementById("submitAuth").addEventListener("click", async () => {
+      const name = document.getElementById("authName").value.trim();
+      const email = document.getElementById("authEmail").value.trim();
+      const pass = document.getElementById("authPassword").value.trim();
 
-      document.getElementById("val-sharpen").textContent = `${sharpen}%`;
-      document.getElementById("val-bright").textContent = `${bright}%`;
-      document.getElementById("val-contrast").textContent = `${contrast}%`;
-      document.getElementById("val-sat").textContent = `${sat}%`;
+      if (!email || !pass) {
+        showToast("Email dan kata sandi wajib diisi.");
+        return;
+      }
 
-      const imgAfter = document.getElementById("img-after");
-      const edgeBoost = (sharpen / 100) * 1.5;
-      imgAfter.style.filter = `brightness(${bright}%) contrast(${contrast}%) saturate(${sat}%) drop-shadow(0 0 ${edgeBoost}px rgba(255, 0, 60, 0.45))`;
-    }
+      const users = getStoredUsers();
 
-    // Slider komparasi
-    const stage = document.getElementById("compare-stage");
-    const sliderHandle = document.getElementById("slider-handle");
-    const layerEnhanced = document.getElementById("layer-enhanced");
-    let isDragging = false;
-
-    function setSliderPosition(clientX) {
-      const rect = stage.getBoundingClientRect();
-      let pos = (clientX - rect.left) / rect.width;
-      pos = Math.max(0.02, Math.min(0.98, pos));
-      const percentage = pos * 100;
-      sliderHandle.style.left = `${percentage}%`;
-      layerEnhanced.style.clipPath = `polygon(${percentage}% 0, 100% 0, 100% 100%, ${percentage}% 100%)`;
-    }
-
-    stage.addEventListener("mousedown", (e) => { isDragging = true; setSliderPosition(e.clientX); });
-    window.addEventListener("mousemove", (e) => { if (isDragging) setSliderPosition(e.clientX); });
-    window.addEventListener("mouseup", () => { isDragging = false; });
-
-    stage.addEventListener("touchstart", (e) => { isDragging = true; setSliderPosition(e.touches[0].clientX); });
-    window.addEventListener("touchmove", (e) => { if (isDragging) setSliderPosition(e.touches[0].clientX); });
-    window.addEventListener("touchend", () => { isDragging = false; });
-
-    /* =====================================================================
-       6. LOGIKA RESOLUSI OTOMATIS (ASPECT RATIO PRESERVATION)
-       ===================================================================== */
-    // Menghitung lebar dan tinggi yang sesuai tanpa merusak rasio gambar asli
-    function calculateAutoDimensions(targetMaxPixel) {
-      const isLandscape = originalWidth >= originalHeight;
-      let targetW, targetH;
-
-      if (isLandscape) {
-        targetW = targetMaxPixel;
-        targetH = Math.round((targetMaxPixel / originalWidth) * originalHeight);
+      if (authMode === "register") {
+        if (!name) {
+          showToast("Nama lengkap wajib diisi.");
+          return;
+        }
+        if (users.some(u => u.email.toLowerCase() === email.toLowerCase())) {
+          showToast("Email sudah terdaftar.");
+          return;
+        }
+        const hashed = await sha256Text(pass);
+        users.push({ name, email, password: hashed });
+        saveUsers(users);
+        activeUser = { name, email };
+        localStorage.setItem(ACTIVE_USER_KEY, JSON.stringify(activeUser));
+        authShell.classList.add("hidden");
+        showToast("Akun berhasil dibuat.");
       } else {
-        // Foto potret / tegak (seperti foto selfie kamera HP 9:16 atau 3:4)
-        targetH = targetMaxPixel;
-        targetW = Math.round((targetMaxPixel / originalHeight) * originalWidth);
+        const match = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+        if (!match) {
+          showToast("Email tidak ditemukan.");
+          return;
+        }
+        const hashed = await sha256Text(pass);
+        if (match.password !== hashed) {
+          showToast("Kata sandi salah.");
+          return;
+        }
+        activeUser = { name: match.name, email: match.email };
+        localStorage.setItem(ACTIVE_USER_KEY, JSON.stringify(activeUser));
+        authShell.classList.add("hidden");
+        showToast("Berhasil masuk.");
       }
-      return { width: targetW, height: targetH };
+
+      switchScreen("home");
+      updateAccountState();
+    });
+
+    function checkLoginState() {
+      const saved = localStorage.getItem(ACTIVE_USER_KEY);
+      if (!saved) {
+        authShell.classList.remove("hidden");
+        return;
+      }
+      try {
+        activeUser = JSON.parse(saved);
+        authShell.classList.add("hidden");
+      } catch {
+        activeUser = null;
+        authShell.classList.remove("hidden");
+      }
     }
 
-    function getTargetMaxPixel(res) {
-      if (res === "5K") return 5120; // 5K Ultra HD
-      if (res === "4K") return 3840; // 4K Ultra HD
-      if (res === "1080p") return 1920; // FHD
-      return 1280; // 720p HD
+    function toggleStabilizer() {
+      isStabilizerOn = !isStabilizerOn;
+      elements.stabilizerBtn.textContent = `📹 Video Stabilizer: ${isStabilizerOn ? "ON" : "OFF"}`;
+      elements.eisInfo.textContent = isStabilizerOn ? "Aktif" : "Nonaktif";
+      elements.eisInfo.style.color = isStabilizerOn ? "var(--success)" : "var(--text-muted)";
+      showToast(isStabilizerOn ? "Stabilizer aktif." : "Stabilizer nonaktif.");
     }
 
-    function updateOutputDimensionPreview() {
-      const dimInfo = document.getElementById("output-dim-info");
-      const estFile = document.getElementById("est-filesize");
-      if (!dimInfo) return;
+    function activateVip() {
+      const value = vipPassword.value.trim();
+      if (value.toLowerCase() === "yuzuki hd") {
+        setPremium(true);
+        closeVipModal();
+        showToast("VIP berhasil aktif!");
+      } else {
+        vipPassword.classList.add("shake");
+        vipError.style.display = "block";
+        setTimeout(() => vipPassword.classList.remove("shake"), 350);
+      }
+    }
 
-      const maxP = getTargetMaxPixel(selectedResolution);
-      const dims = calculateAutoDimensions(maxP);
-      dimInfo.textContent = `${dims.width} × ${dims.height} px (${originalWidth >= originalHeight ? 'Landscape' : 'Portrait'})`;
+    function applyPreset(mode, btn) {
+      document.querySelectorAll(".preset").forEach(el => el.classList.remove("active"));
+      btn.classList.add("active");
 
-      const estMap = {
-        "720p": "~ 4.2 MB",
-        "1080p": "~ 12.8 MB",
-        "4K": "~ 38.6 MB",
-        "5K": "~ 78.4 MB"
+      const presets = {
+        "5k_ultra": { sharpen: 110, contrast: 125, bright: 105, sat: 100 },
+        "face_tune": { sharpen: 120, contrast: 118, bright: 104, sat: 100 },
+        "hair_texture": { sharpen: 130, contrast: 128, bright: 103, sat: 100 },
+        "fabric": { sharpen: 108, contrast: 130, bright: 102, sat: 98 },
+        "dynamic": { sharpen: 96, contrast: 118, bright: 108, sat: 105 },
+        "noise_clean": { sharpen: 80, contrast: 112, bright: 102, sat: 100 }
       };
-      estFile.textContent = estMap[selectedResolution] || "~ 10 MB";
+
+      const chosen = presets[mode];
+      if (!chosen) return;
+
+      document.getElementById("rngSharpen").value = chosen.sharpen;
+      document.getElementById("rngContrast").value = chosen.contrast;
+      document.getElementById("rngBright").value = chosen.bright;
+      document.getElementById("rngSat").value = chosen.sat;
+      reprocessCurrentMedia();
+      showToast("Preset AI diterapkan.");
     }
 
-    function goToExportScreen() {
-      if (!currentMediaUrl) {
-        showToast("Pilih foto terlebih dahulu.");
+    function reprocessCurrentMedia() {
+      const sharpen = Number(document.getElementById("rngSharpen").value) / 100;
+      const contrast = Number(document.getElementById("rngContrast").value) / 100;
+      const bright = Number(document.getElementById("rngBright").value) / 100;
+      const sat = Number(document.getElementById("rngSat").value) / 100;
+
+      document.getElementById("valSharpen").textContent = document.getElementById("rngSharpen").value + "%";
+      document.getElementById("valContrast").textContent = document.getElementById("rngContrast").value + "%";
+      document.getElementById("valBright").textContent = document.getElementById("rngBright").value + "%";
+      document.getElementById("valSat").textContent = document.getElementById("rngSat").value + "%";
+
+      if (isVideoMode) {
+        const filter = `contrast(${1.2 * contrast}) brightness(${1.08 * bright}) saturate(${1.1 * sat})`;
+        elements.videoAfter.style.filter = filter;
         return;
       }
-      switchTab("export");
-      selectResolution(isPremium() ? "5K" : "720p");
+
+      if (!currentBaseImage) return;
+
+      const canvas = document.getElementById("previewCanvas");
+      const ctx = canvas.getContext("2d");
+      const base = currentBaseImage;
+      const sourceW = base.naturalWidth || base.width || 1280;
+      const sourceH = base.naturalHeight || base.height || 720;
+      const scale = Math.min(1, 1280 / Math.max(sourceW, sourceH));
+      const w = Math.max(1, Math.round(sourceW * scale));
+      const h = Math.max(1, Math.round(sourceH * scale));
+
+      canvas.width = w;
+      canvas.height = h;
+      ctx.clearRect(0, 0, w, h);
+      ctx.filter = `contrast(${1.2 * contrast}) brightness(${1.08 * bright}) saturate(${1.12 * sat})`;
+      ctx.drawImage(base, 0, 0, w, h);
+
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const data = imageData.data;
+      const strength = 0.8 * sharpen;
+
+      for (let y = 1; y < h - 1; y++) {
+        for (let x = 1; x < w - 1; x++) {
+          const idx = (y * w + x) * 4;
+          const left = idx - 4;
+          const right = idx + 4;
+          const top = idx - w * 4;
+          const bottom = idx + w * 4;
+
+          for (let c = 0; c < 3; c++) {
+            const center = data[idx + c];
+            const edge = data[left + c] + data[right + c] + data[top + c] + data[bottom + c];
+            let v = center * (1 + strength * 4) - edge * strength;
+            v = ((v - 128) * contrast) + 128;
+            v = v * bright;
+            data[idx + c] = Math.max(0, Math.min(255, v));
+          }
+        }
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+      elements.imgAfter.src = canvas.toDataURL("image/jpeg", 0.96);
+      elements.imgAfter.style.filter = `contrast(${1.4 * contrast}) brightness(${1.1 * bright}) saturate(${1.1 * sat})`;
+      updateSliderComparison();
     }
 
-    function selectResolution(res) {
-      if ((res === "1080p" || res === "4K" || res === "5K") && !isPremium()) {
-        showToast(`Resolusi ${res} membutuhkan akses VIP 5K.`);
+    function rotateMedia(angle) {
+      mediaRotation = (mediaRotation + angle) % 360;
+      applyTransform();
+    }
+
+    function flipMedia() {
+      mediaFlip = !mediaFlip;
+      applyTransform();
+    }
+
+    function resetTransforms() {
+      mediaRotation = 0;
+      mediaFlip = false;
+      applyTransform();
+    }
+
+    function applyTransform() {
+      const transform = `rotate(${mediaRotation}deg) scaleX(${mediaFlip ? -1 : 1})`;
+      elements.imgBefore.style.transform = transform;
+      elements.imgAfter.style.transform = transform;
+      elements.videoBefore.style.transform = transform;
+      elements.videoAfter.style.transform = transform;
+    }
+
+    function getSafeDimensions(maxPx) {
+      const srcW = currentBaseImage ? (currentBaseImage.naturalWidth || currentBaseImage.width || 1280) : (elements.videoBefore.videoWidth || 1280);
+      const srcH = currentBaseImage ? (currentBaseImage.naturalHeight || currentBaseImage.height || 720) : (elements.videoBefore.videoHeight || 720);
+      if (!srcW || !srcH) return { w: 1280, h: 720 };
+
+      const isLandscape = srcW >= srcH;
+      if (isLandscape) {
+        const w = Math.min(maxPx, srcW);
+        const h = Math.max(1, Math.round((w / srcW) * srcH));
+        return { w, h };
+      }
+      const h = Math.min(maxPx, srcH);
+      const w = Math.max(1, Math.round((h / srcH) * srcW));
+      return { w, h };
+    }
+
+    function updateOutputMeta() {
+      const max = {
+        "720p": 1280,
+        "1080p": 1920,
+        "4K": 3840,
+        "5K": 5120
+      };
+      const dims = getSafeDimensions(max[selectedResolution] || 1280);
+      document.getElementById("dimInfo").textContent = dims.w + " × " + dims.h + " px";
+      document.getElementById("formatInfo").textContent = isVideoMode ? "Video MP4" : "Foto PNG";
+      document.getElementById("sizeInfo").textContent = isVideoMode ?
+        (selectedResolution === "5K" ? "~ 64 MB" : selectedResolution === "4K" ? "~ 30 MB" : selectedResolution === "1080p" ? "~ 18 MB" : "~ 8 MB") :
+        (selectedResolution === "5K" ? "~ 36 MB" : selectedResolution === "4K" ? "~ 22 MB" : selectedResolution === "1080p" ? "~ 12 MB" : "~ 4 MB");
+    }
+
+    function selectResolution(value) {
+      if ((value === "1080p" || value === "4K" || value === "5K") && !isPremium()) {
+        showToast("Resolusi ini hanya untuk VIP.");
         openVipModal();
         return;
       }
 
-      selectedResolution = res;
-      document.querySelectorAll(".chip[id^='chip-res-']").forEach(el => el.classList.remove("selected"));
-      const targetChip = document.getElementById(`chip-res-${res.toLowerCase()}`);
-      if (targetChip) targetChip.classList.add("selected");
-
-      updateOutputDimensionPreview();
+      selectedResolution = value;
+      document.querySelectorAll(".chip[id^='res']").forEach(el => el.classList.remove("selected"));
+      document.getElementById("res" + value.replace(/[^0-9]/g, ""))?.classList.add("selected");
+      updateOutputMeta();
     }
 
-    function selectFps(element, fps) {
-      if (fps === "60 FPS" && !isPremium()) {
-        showToast("60 FPS Boost membutuhkan lisensi VIP.");
+    function selectChip(el) {
+      el.parentElement.querySelectorAll(".chip").forEach(chip => chip.classList.remove("selected"));
+      el.classList.add("selected");
+    }
+
+    function selectFps(label, el) {
+      if (!isPremium() && label === "60 FPS") {
         openVipModal();
+        showToast("60 FPS hanya untuk VIP.");
         return;
       }
-      selectChip(element);
-    }
-
-    function selectChip(element) {
-      const parent = element.parentElement;
-      parent.querySelectorAll(".chip").forEach(c => c.classList.remove("selected"));
-      element.classList.add("selected");
+      selectChip(el);
     }
 
     function startExportProcess() {
-      if (!isPremium() && getDailyUsage() >= DAILY_LIMIT) {
-        showToast("Batas kuota harian gratis habis! Buka VIP.");
+      if (!activeUser) {
+        authShell.classList.remove("hidden");
+        return;
+      }
+      if (!isPremium() && getDailyUsage() >= 5) {
         openVipModal();
+        showToast("Kapasitas gratis hari ini sudah penuh.");
         return;
       }
 
-      const progressBox = document.getElementById("export-progress-box");
-      const btnStart = document.getElementById("btn-start-export");
-      const barFill = document.getElementById("export-bar-fill");
-      const percentText = document.getElementById("export-percentage");
-      const stepText = document.getElementById("export-step-text");
-      const doneActions = document.getElementById("export-done-actions");
+      elements.progressWrap.style.display = "block";
+      elements.exportDone.style.display = "none";
+      elements.exportStartBtn.style.display = "inline-flex";
 
-      progressBox.style.display = "block";
-      btnStart.style.display = "none";
-      doneActions.style.display = "none";
+      if (isVideoMode) {
+        processVideoExport();
+      } else {
+        processPhotoExport();
+      }
+    }
 
-      let progress = 0;
-      const steps = [
-        "Menganalisis rasio gambar asli...",
-        `Menerapkan AI Super Resolution ${selectedResolution}...`,
-        "Merekonstruksi detail unsharp mask...",
-        "Merender file output resolusi tinggi..."
-      ];
+    function processPhotoExport() {
+      const fill = document.getElementById("progressFill");
+      const pct = document.getElementById("progressPercent");
+      const text = document.getElementById("progressText");
+      let value = 0;
 
       const interval = setInterval(() => {
-        progress += 4;
-        barFill.style.width = `${progress}%`;
-        percentText.textContent = `${progress}%`;
+        value += 7;
+        fill.style.width = value + "%";
+        pct.textContent = value + "%";
 
-        if (progress < 25) stepText.textContent = steps[0];
-        else if (progress < 55) stepText.textContent = steps[1];
-        else if (progress < 85) stepText.textContent = steps[2];
-        else stepText.textContent = steps[3];
+        if (value < 30) text.textContent = "Menganalisa piksel...";
+        else if (value < 70) text.textContent = "Merekonstruksi detail HD...";
+        else text.textContent = "Menyelesaikan file output...";
 
-        if (progress >= 100) {
+        if (value >= 100) {
           clearInterval(interval);
-          stepText.textContent = `Selesai (${selectedResolution})!`;
-          doneActions.style.display = "block";
-          incrementDailyUsage();
-          saveProjectToHistory();
+          renderPhotoExport();
+          incrementUsage();
+          elements.progressWrap.style.display = "none";
+          elements.exportDone.style.display = "block";
         }
-      }, 50);
+      }, 45);
     }
 
-    function saveToGallery() {
-      const canvas = document.getElementById("hidden-canvas");
+    function renderPhotoExport() {
+      const canvas = document.getElementById("hiddenCanvas");
       const ctx = canvas.getContext("2d");
+      const dims = getSafeDimensions((selectedResolution === "5K" ? 5120 : selectedResolution === "4K" ? 3840 : selectedResolution === "1080p" ? 1920 : 1280));
+      canvas.width = dims.w;
+      canvas.height = dims.h;
 
-      // Menghitung dimensi otomatis yang proporsional
-      const maxP = getTargetMaxPixel(selectedResolution);
-      const dims = calculateAutoDimensions(maxP);
+      const img = new Image();
+      img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate((mediaRotation * Math.PI) / 180);
+        ctx.scale(mediaFlip ? -1 : 1, 1);
+        ctx.drawImage(img, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+        ctx.restore();
 
-      canvas.width = dims.width;
-      canvas.height = dims.height;
+        if (!isPremium()) {
+          ctx.font = "bold " + Math.max(18, Math.round(canvas.width * 0.02)) + "px sans-serif";
+          ctx.fillStyle = "rgba(255,255,255,.45)";
+          ctx.textAlign = "right";
+          ctx.fillText("Yuzuki HD", canvas.width - 20, canvas.height - 20);
+        }
 
-      // Bersihkan canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Gambar media proporsional penuh tanpa melar atau gepeng
-      if (currentImageElement.complete) {
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = "high";
-        ctx.drawImage(currentImageElement, 0, 0, canvas.width, canvas.height);
-      }
-
-      // Watermark jika masih gratis
-      if (!isPremium()) {
-        const fontSize = Math.max(20, Math.round(canvas.width * 0.035));
-        ctx.font = `bold ${fontSize}px sans-serif`;
-        ctx.fillStyle = "rgba(255, 255, 255, 0.45)";
-        ctx.textAlign = "right";
-        ctx.fillText("Yuzuki HD Free", canvas.width - (fontSize), canvas.height - (fontSize));
-      }
-
-      const link = document.createElement("a");
-      link.download = `YuzukiHD_${selectedResolution}_${dims.width}x${dims.height}_${Date.now()}.png`;
-      link.href = canvas.toDataURL("image/png", 0.98);
-      link.click();
-
-      showToast(`Tersimpan ke galeri: ${dims.width} × ${dims.height} px!`);
-    }
-
-    function shareSocial(platform) {
-      showToast(`Membuka opsi bagikan ke ${platform}...`);
-    }
-
-    /* =====================================================================
-       7. NAVIGASI, RIWAYAT PROJECT & INITIAL LOAD
-       ===================================================================== */
-    function switchTab(tabId) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-
-      const targetScreen = document.getElementById(`screen-${tabId}`);
-      if (targetScreen) targetScreen.classList.add("active");
-
-      const navBtn = document.getElementById(`nav-${tabId}`);
-      if (navBtn) navBtn.classList.add("active");
-
-      if (tabId === "project") renderProjectHistory();
-    }
-
-    function openSettingsScreen() {
-      switchTab("settings");
-    }
-
-    function handleToolClick(toolName, isVipTool) {
-      if (isVipTool && !isPremium()) {
-        showToast(`${toolName} membutuhkan akses VIP 5K.`);
-        openVipModal();
-        return;
-      }
-      triggerFileInput("image/*");
-    }
-
-    function applyTemplate(templateName) {
-      showToast(`Template ${templateName} diterapkan.`);
-      triggerFileInput("image/*");
-    }
-
-    function saveProjectToHistory() {
-      const history = JSON.parse(localStorage.getItem("yuzuki_projects") || "[]");
-      const maxP = getTargetMaxPixel(selectedResolution);
-      const dims = calculateAutoDimensions(maxP);
-      const newProj = {
-        id: Date.now(),
-        title: `Edit_${selectedResolution}_${dims.width}x${dims.height}`,
-        date: new Date().toLocaleDateString("id-ID", { hour: "2-digit", minute: "2-digit" }),
-        resolution: `${selectedResolution} (${dims.width}x${dims.height})`,
-        thumb: currentMediaUrl
+        canvas.toBlob((blob) => {
+          if (blob) {
+            if (exportUrl) URL.revokeObjectURL(exportUrl);
+            exportUrl = URL.createObjectURL(blob);
+          }
+        }, "image/png", 0.98);
       };
-      history.unshift(newProj);
-      localStorage.setItem("yuzuki_projects", JSON.stringify(history.slice(0, 10)));
+      img.src = elements.imgAfter.src || currentObjectUrl || "";
     }
 
-    function renderProjectHistory() {
-      const list = document.getElementById("project-history-list");
-      const history = JSON.parse(localStorage.getItem("yuzuki_projects") || "[]");
+    function processVideoExport() {
+      const canvas = document.getElementById("hiddenCanvas");
+      const ctx = canvas.getContext("2d");
+      const dims = getSafeDimensions((selectedResolution === "5K" ? 5120 : selectedResolution === "4K" ? 3840 : selectedResolution === "1080p" ? 1920 : 1280));
+      canvas.width = dims.w;
+      canvas.height = dims.h;
 
-      if (history.length === 0) {
-        list.innerHTML = `<div style="text-align: center; color: var(--text-muted); font-size: 13px; padding: 40px 0;">Belum ada riwayat hasil edit.</div>`;
+      const stream = canvas.captureStream(30);
+      let recorder;
+      let mimeType = "video/webm";
+      try {
+        recorder = new MediaRecorder(stream, { mimeType: "video/webm;codecs=vp9" });
+      } catch {
+        try {
+          recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+        } catch {
+          recorder = new MediaRecorder(stream);
+        }
+      }
+
+      const chunks = [];
+      recorder.ondataavailable = evt => {
+        if (evt.data && evt.data.size > 0) chunks.push(evt.data);
+      };
+
+      recorder.onstop = () => {
+        const blob = new Blob(chunks, { type: mimeType });
+        if (exportUrl) URL.revokeObjectURL(exportUrl);
+        exportUrl = URL.createObjectURL(blob);
+        elements.progressWrap.style.display = "none";
+        elements.exportDone.style.display = "block";
+        incrementUsage();
+      };
+
+      const source = elements.videoAfter;
+      const actualDuration = Number.isFinite(source.duration) && source.duration > 0 ? source.duration : 5;
+      const targetDuration = Math.min(actualDuration, 30);
+      source.currentTime = 0;
+      source.muted = true;
+      source.play();
+      recorder.start();
+
+      const start = performance.now();
+      const fill = document.getElementById("progressFill");
+      const pct = document.getElementById("progressPercent");
+      const text = document.getElementById("progressText");
+
+      function drawLoop(ts) {
+        const elapsed = (ts - start) / 1000;
+        const pctValue = Math.min((elapsed / targetDuration) * 100, 98);
+        fill.style.width = pctValue + "%";
+        pct.textContent = Math.round(pctValue) + "%";
+        text.textContent = "Merekam video HD...";
+
+        if (isStabilizerOn) {
+          ctx.save();
+          ctx.translate(canvas.width / 2, canvas.height / 2);
+          ctx.scale(1.06, 1.06);
+          ctx.drawImage(source, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+          ctx.restore();
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(source, 0, 0, canvas.width, canvas.height);
+        }
+
+        if (elapsed < targetDuration && !source.paused && source.readyState >= 2) {
+          requestAnimationFrame(drawLoop);
+        } else {
+          source.pause();
+          recorder.stop();
+        }
+      }
+
+      requestAnimationFrame(drawLoop);
+    }
+
+    function saveFile() {
+      if (!exportUrl) {
+        showToast("Belum ada file hasil.");
         return;
       }
 
-      list.innerHTML = history.map(item => `
-        <div class="project-card">
-          <img src="${item.thumb}" class="project-thumb" alt="Thumb">
-          <div class="project-meta">
-            <h4>${item.title}</h4>
-            <p>${item.date} • ${item.resolution}</p>
-          </div>
-          <button class="banner-btn" style="padding: 4px 8px; font-size: 11px;" onclick="showToast('Menyiapkan file...')">Unduh</button>
-        </div>
-      `).join("");
+      const a = document.createElement("a");
+      a.href = exportUrl;
+      a.download = `YuzukiHD_${Date.now()}_${isVideoMode ? "video" : "photo"}${isVideoMode ? ".mp4" : ".png"}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      showToast("File berhasil disimpan.");
     }
 
-    function clearCache() {
-      localStorage.removeItem("yuzuki_projects");
-      renderProjectHistory();
-      showToast("Cache riwayat dibersihkan.");
-    }
-
-    function setEditorTab(tab, btn) {
-      document.querySelectorAll(".editor-tab-btn").forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      if (tab === "filters") {
-        showToast("Filter Sinematik diaplikasikan.");
+    function openResultDirect() {
+      if (!exportUrl) {
+        showToast("Belum ada hasil export.");
+        return;
+      }
+      const w = window.open("", "_blank");
+      if (!w) {
+        showToast("Pop-up diblokir. Izinkan pop-up untuk melihat file.");
+        return;
+      }
+      if (isVideoMode) {
+        w.document.write(`<html><body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;"><video src="${exportUrl}" controls autoplay style="max-width:100%;max-height:100vh;"></video></body></html>`);
+      } else {
+        w.document.write(`<html><body style="margin:0;background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;"><img src="${exportUrl}" style="max-width:100%;max-height:100vh;" /></body></html>`);
       }
     }
 
-    function showToast(message) {
-      const toast = document.getElementById("toast");
-      document.getElementById("toast-text").textContent = message;
-      toast.classList.add("show");
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2600);
+    function updateSliderComparison() {
+      const left = 50;
+      elements.sliderHandle.style.left = left + "%";
+      elements.imgLayer.style.clipPath = `polygon(${left}% 0, 100% 0, 100% 100%, ${left}% 100%)`;
+      elements.videoLayer.style.clipPath = `polygon(${left}% 0, 100% 0, 100% 100%, ${left}% 100%)`;
+    }
+
+    document.getElementById("compareStage").addEventListener("pointerdown", (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const percent = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
+      elements.sliderHandle.style.left = percent + "%";
+      elements.imgLayer.style.clipPath = `polygon(${percent}% 0, 100% 0, 100% 100%, ${percent}% 100%)`;
+      elements.videoLayer.style.clipPath = `polygon(${percent}% 0, 100% 0, 100% 100%, ${percent}% 100%)`;
+    });
+
+    document.addEventListener("pointermove", (e) => {
+      if (e.buttons !== 1) return;
+      const rect = elements.compareStage.getBoundingClientRect();
+      const percent = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
+      elements.sliderHandle.style.left = percent + "%";
+      elements.imgLayer.style.clipPath = `polygon(${percent}% 0, 100% 0, 100% 100%, ${percent}% 100%)`;
+      elements.videoLayer.style.clipPath = `polygon(${percent}% 0, 100% 0, 100% 100%, ${percent}% 100%)`;
+    });
+
+    document.getElementById("filePicker").addEventListener("change", (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      isVideoMode = file.type.startsWith("video/");
+      const url = URL.createObjectURL(file);
+      currentObjectUrl = url;
+
+      if (isVideoMode) {
+        prepareVideo(file, url);
+      } else {
+        prepareImage(file, url);
+      }
+
+      switchScreen("editor");
+      showToast(isVideoMode ? "Video berhasil dimuat.” : "Foto berhasil dimuat.");
+    });
+
+    function prepareImage(file, url) {
+      const img = new Image();
+      img.onload = () => {
+        currentBaseImage = img;
+        elements.imgBefore.src = url;
+        elements.imgAfter.src = url;
+        elements.videoBefore.style.display = "none";
+        elements.videoLayer.style.display = "none";
+        elements.imgLayer.style.display = "block";
+        elements.imgBefore.style.display = "block";
+        elements.editorTitle.textContent = "Editor Foto 4K / 5K Fidelity";
+        elements.watermarkLabel.textContent = isPremium() ? "Yuzuki HD Pro" : "Yuzuki HD";
+        updateOutputMeta();
+        reprocessCurrentMedia();
+      };
+      img.src = url;
+    }
+
+    function prepareVideo(file, url) {
+      const source = elements.videoBefore;
+      const enhanced = elements.videoAfter;
+      source.src = url;
+      enhanced.src = url;
+      source.style.display = "block";
+      enhanced.style.display = "block";
+      elements.imgLayer.style.display = "none";
+      elements.imgBefore.style.display = "none";
+      elements.videoLayer.style.display = "block";
+      elements.editorTitle.textContent = "Editor Video HD 4K / 5K";
+      elements.watermarkLabel.textContent = isPremium() ? "Yuzuki HD Pro" : "Yuzuki HD";
+      document.getElementById("videoTabBtn").style.display = "block";
+      source.onloadedmetadata = () => {
+        currentBaseImage = null;
+        currentVideoElement = source;
+        updateOutputMeta();
+      };
+      source.onplay = () => { enhanced.currentTime = source.currentTime; enhanced.play(); };
+      source.onpause = () => { enhanced.pause(); };
+      source.ontimeupdate = () => {
+        if (Math.abs(source.currentTime - enhanced.currentTime) > 0.08) {
+          enhanced.currentTime = source.currentTime;
+        }
+      };
+      source.play();
+      updateOutputMeta();
+    }
+
+    function setupDemoImage() {
+      const canvas = document.getElementById("hiddenCanvas");
+      canvas.width = 1280;
+      canvas.height = 720;
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 1280, 720);
+      gradient.addColorStop(0, "#2b0510");
+      gradient.addColorStop(0.5, "#1d0109");
+      gradient.addColorStop(1, "#090104");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 1280, 720);
+      ctx.fillStyle = "#ff003c";
+      ctx.font = "900 34px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText("Yuzuki HD – 4K / 5K Fidelity", 640, 340);
+      ctx.fillStyle = "#fff";
+      ctx.font = "700 22px sans-serif";
+      ctx.fillText("Detail AI siap diproses", 640, 390);
+      const url = canvas.toDataURL("image/png");
+      elements.imgBefore.src = url;
+      elements.imgAfter.src = url;
+      const img = new Image();
+      img.onload = () => {
+        currentBaseImage = img;
+        reprocessCurrentMedia();
+      };
+      img.src = url;
+      currentObjectUrl = url;
     }
 
     function updateClock() {
       const now = new Date();
-      const h = String(now.getHours()).padStart(2, "0");
-      const m = String(now.getMinutes()).padStart(2, "0");
-      const clock = document.getElementById("clock-display");
-      if (clock) clock.textContent = `${h}:${m}`;
+      const value = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit", hour12: false });
+      document.getElementById("clock").textContent = value;
     }
 
-    // Inisialisasi awal saat halaman selesai dimuat
-    window.addEventListener("DOMContentLoaded", () => {
-      setInterval(updateClock, 1000);
+    function init() {
       updateClock();
+      setInterval(updateClock, 1000);
+      updateAuthView();
+      // initial auth state
+      checkLoginState();
+      updateAccountState();
+      setupDemoImage();
+      updateSliderComparison();
+      selectResolution("720p");
+      switchScreen("home");
+    }
 
-      // Buat gambar contoh awal
-      const dummyCanvas = document.getElementById("hidden-canvas");
-      dummyCanvas.width = 1280;
-      dummyCanvas.height = 720;
-      const ctx = dummyCanvas.getContext("2d");
-      const grad = ctx.createLinearGradient(0, 0, 1280, 720);
-      grad.addColorStop(0, "#2b030f");
-      grad.addColorStop(1, "#0a0104");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 1280, 720);
-      ctx.fillStyle = "#ff003c";
-      ctx.font = "bold 44px sans-serif";
-      ctx.textAlign = "center";
-      ctx.fillText("Yuzuki HD – Auto Ratio 5K Engine", 640, 360);
-      currentMediaUrl = dummyCanvas.toDataURL();
-      setupEditorMedia(currentMediaUrl);
+    document.addEventListener("DOMContentLoaded", init);
 
-      updatePremiumUIState();
+    window.addEventListener("beforeunload", () => {
+      if (currentObjectUrl && currentObjectUrl.startsWith("blob:")) URL.revokeObjectURL(currentObjectUrl);
+      if (exportUrl && exportUrl.startsWith("blob:")) URL.revokeObjectURL(exportUrl);
     });
   </script>
 </body>
